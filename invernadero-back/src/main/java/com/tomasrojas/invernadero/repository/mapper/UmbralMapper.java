@@ -54,6 +54,7 @@ public class UmbralMapper {
      */
     public UmbralEntity toEntity(UmbralAmbiental umbral, ZonaEntity zonaEntity) {
         UmbralEntity entity = new UmbralEntity();
+        entity.setId(umbral.getId());   // preservar id para que JPA haga UPDATE en lugar de INSERT
         entity.setZona(zonaEntity);
         entity.setTipo(umbral.getTipo());
         entity.setValorMin(umbral.getValorMin());
