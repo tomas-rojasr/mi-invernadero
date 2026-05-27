@@ -55,7 +55,8 @@ export interface Cultivo {
   id: string;
   zonaId: string;
   nombre: string;
-  descripcion: string;
+  variedad: string | null;
+  notas: string | null;
   plantadoEn: string;
   creadoEn: string;
 }
@@ -64,14 +65,15 @@ export interface Umbral {
   id: string;
   zonaId: string;
   tipo: string;
-  minimo: number;
-  maximo: number;
+  valorMin: number;
+  valorMax: number;
   actualizadoEn: string;
 }
 
 export interface CrearCultivoRequest {
   nombre: string;
-  descripcion: string;
+  variedad?: string;
+  notas?: string;
 }
 
 export interface DefinirUmbralRequest {

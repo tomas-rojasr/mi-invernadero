@@ -95,8 +95,8 @@ export default function UmbralesPage() {
             ) : umbrales.map(u => (
               <tr key={u.id} style={s.tr}>
                 <td style={s.td}>{t(`metricas.${u.tipo}`)}</td>
-                <td style={s.td}>{u.minimo}</td>
-                <td style={s.td}>{u.maximo}</td>
+                <td style={s.td}>{u.valorMin}</td>
+                <td style={s.td}>{u.valorMax}</td>
                 <td style={s.td}>{new Date(u.actualizadoEn).toLocaleString()}</td>
               </tr>
             ))}

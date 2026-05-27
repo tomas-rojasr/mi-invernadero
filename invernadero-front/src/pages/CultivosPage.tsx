@@ -20,7 +20,8 @@ export default function CultivosPage() {
   const [cultivos, setCultivos] = useState<Cultivo[]>([]);
   const [mostrarForm, setMostrarForm] = useState(false);
   const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+  const [variedad, setVariedad] = useState('');
+  const [notas, setNotas] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => { api.zonas.listar().then(r => setZonas(r.data)); }, []);
@@ -33,8 +34,8 @@ export default function CultivosPage() {
   const crear = () => {
     if (!zonaId || !nombre.trim()) { setError('Selecciona una zona e ingresa el nombre'); return; }
     setError('');
-    api.cultivos.crear(zonaId, { nombre, descripcion })
-      .then(() => { setNombre(''); setDescripcion(''); setMostrarForm(false); api.cultivos.listar(zonaId).then(r => setCultivos(r.data)); })
+    api.cultivos.crear(zonaId, { nombre, variedad: variedad || undefined, notas: notas || undefined })
+      .then(() => { setNombre(''); setVariedad(''); setNotas(''); setMostrarForm(false); api.cultivos.listar(zonaId).then(r => setCultivos(r.data)); })
       .catch(() => setError(t('error.generic')));
   };
 
@@ -58,7 +59,8 @@ export default function CultivosPage() {
               {zonas.map(z => <option key={z.id} value={z.id}>{z.nombre}</option>)}
             </select>
             <input style={s.input} placeholder={t('cultivo.nombre')} value={nombre} onChange={e => setNombre(e.target.value)} />
-            <input style={s.input} placeholder={t('cultivo.descripcion')} value={descripcion} onChange={e => setDescripcion(e.target.value)} />
+            <input style={s.input} placeholder="Variedad (opcional)" value={variedad} onChange={e => setVariedad(e.target.value)} />
+            <input style={s.input} placeholder="Notas (opcional)" value={notas} onChange={e => setNotas(e.target.value)} />
           </div>
           <div style={s.btnRow}>
             <button style={s.btnPrimary} onClick={crear}>{t('cultivo.guardar')}</button>
@@ -78,7 +80,7 @@ export default function CultivosPage() {
           <thead>
             <tr>
               <th style={s.th}>{t('cultivo.nombre')}</th>
-              <th style={s.th}>{t('cultivo.descripcion')}</th>
+              <th style={s.th}>Variedad</th>
               <th style={s.th}>{t('cultivo.plantado')}</th>
               <th style={s.th}>{t('cultivo.creado')}</th>
             </tr>
@@ -91,7 +93,7 @@ export default function CultivosPage() {
             ) : cultivos.map(c => (
               <tr key={c.id} style={s.tr}>
                 <td style={s.td}><strong>{c.nombre}</strong></td>
-                <td style={s.td}>{c.descripcion}</td>
+                <td style={s.td}>{c.variedad ?? '—'}</td>
                 <td style={s.td}>{new Date(c.plantadoEn).toLocaleDateString()}</td>
                 <td style={s.td}>{new Date(c.creadoEn).toLocaleDateString()}</td>
               </tr>
