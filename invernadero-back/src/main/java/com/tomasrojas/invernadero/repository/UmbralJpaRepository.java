@@ -30,13 +30,13 @@ public interface UmbralJpaRepository extends JpaRepository<UmbralEntity, UUID> {
 
     /**
      * Busca el umbral de una zona para un tipo de métrica específico.
-     * Se usa para determinar si ya existe un umbral antes de crear uno nuevo.
+     * Usa {@code findFirst} para tolerar filas duplicadas heredadas de migraciones.
      *
      * @param zonaId identificador de la zona
      * @param tipo   tipo de métrica ambiental
      * @return el umbral existente, o vacío si no está configurado
      */
-    Optional<UmbralEntity> findByZonaIdAndTipo(UUID zonaId, MetricaTipo tipo);
+    Optional<UmbralEntity> findFirstByZonaIdAndTipo(UUID zonaId, MetricaTipo tipo);
 
     /**
      * Elimina todos los umbrales de una zona.

@@ -39,6 +39,13 @@ public interface LecturaPersistencePort {
     List<LecturaAmbiental> listarPorZona(UUID zonaId, int limite);
 
     /**
+     * Elimina una lectura por su identificador.
+     *
+     * @param id identificador de la lectura
+     */
+    void eliminarPorId(UUID id);
+
+    /**
      * Elimina todas las lecturas asociadas a una zona.
      * Se usa en cascada al eliminar una zona.
      *

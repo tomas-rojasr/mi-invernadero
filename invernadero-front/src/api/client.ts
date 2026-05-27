@@ -76,10 +76,16 @@ export interface CrearCultivoRequest {
   notas?: string;
 }
 
+export interface ActualizarCultivoRequest {
+  nombre: string;
+  variedad?: string;
+  notas?: string;
+}
+
 export interface DefinirUmbralRequest {
   tipo: string;
-  minimo: number;
-  maximo: number;
+  valorMin: number;
+  valorMax: number;
 }
 
 export interface TaigaHistoria {
@@ -110,18 +116,26 @@ export const api = {
       client.get<Lectura[]>(`/api/v1/zonas/${zonaId}/lecturas`),
     registrar: (zonaId: string, body: RegistrarLecturaRequest) =>
       client.post<Lectura>(`/api/v1/zonas/${zonaId}/lecturas`, body),
+    eliminar: (zonaId: string, lecturaId: string) =>
+      client.delete(`/api/v1/zonas/${zonaId}/lecturas/${lecturaId}`),
   },
   cultivos: {
     listar: (zonaId: string) =>
       client.get<Cultivo[]>(`/api/v1/zonas/${zonaId}/cultivos`),
     crear: (zonaId: string, body: CrearCultivoRequest) =>
       client.post<Cultivo>(`/api/v1/zonas/${zonaId}/cultivos`, body),
+    actualizar: (zonaId: string, cultivoId: string, body: ActualizarCultivoRequest) =>
+      client.put<Cultivo>(`/api/v1/zonas/${zonaId}/cultivos/${cultivoId}`, body),
+    eliminar: (zonaId: string, cultivoId: string) =>
+      client.delete(`/api/v1/zonas/${zonaId}/cultivos/${cultivoId}`),
   },
   umbrales: {
     listar: (zonaId: string) =>
       client.get<Umbral[]>(`/api/v1/zonas/${zonaId}/umbrales`),
     definir: (zonaId: string, body: DefinirUmbralRequest) =>
       client.put<Umbral>(`/api/v1/zonas/${zonaId}/umbrales`, body),
+    eliminar: (zonaId: string, umbralId: string) =>
+      client.delete(`/api/v1/zonas/${zonaId}/umbrales/${umbralId}`),
   },
   taiga: {
     buscar: (id: number) =>

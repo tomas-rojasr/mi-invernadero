@@ -78,4 +78,13 @@ public class LecturaApplicationService {
         int limiteFinal = (limite == null || limite < 1) ? LIMITE_DEFAULT : limite;
         return lecturaPort.listarPorZona(zonaId, limiteFinal);
     }
+
+    /**
+     * Elimina una lectura por su identificador.
+     *
+     * @param lecturaId identificador de la lectura a eliminar
+     */
+    public void eliminar(UUID lecturaId) {
+        lecturaPort.eliminarPorId(lecturaId);
+    }
 }

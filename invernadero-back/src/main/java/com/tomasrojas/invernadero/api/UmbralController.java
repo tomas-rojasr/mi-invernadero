@@ -14,6 +14,7 @@ import com.tomasrojas.invernadero.service.UmbralApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,5 +71,18 @@ public class UmbralController {
         return mapper.toUmbralResponse(
                 service.definir(zonaId, request.tipo(), request.valorMin(), request.valorMax())
         );
+    }
+
+    /**
+     * Elimina un umbral por su identificador.
+     *
+     * @param zonaId   identificador de la zona (no usado en la operación, mantiene la URL REST)
+     * @param umbralId identificador del umbral a eliminar
+     */
+    @DeleteMapping("/{umbralId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Eliminar un umbral ambiental")
+    public void eliminar(@PathVariable UUID zonaId, @PathVariable UUID umbralId) {
+        service.eliminar(umbralId);
     }
 }

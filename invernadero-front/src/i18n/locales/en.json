@@ -35,7 +35,8 @@
     "valor": "Value",
     "registrada": "Recorded at",
     "no_lecturas": "No readings for this zone.",
-    "guardar": "Record"
+    "guardar": "Record",
+    "eliminar": "Delete"
   },
   "cultivo": {
     "title": "Crops",
@@ -48,7 +49,9 @@
     "creado": "Registered",
     "no_cultivos": "No crops for this zone.",
     "guardar": "Save crop",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "editar": "Edit",
+    "eliminar": "Delete"
   },
   "umbral": {
     "title": "Environmental thresholds",
@@ -61,7 +64,8 @@
     "actualizado": "Updated",
     "no_umbrales": "No thresholds defined.",
     "guardar": "Save threshold",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "eliminar": "Delete"
   },
   "taiga": {
     "title": "User stories — Taiga",

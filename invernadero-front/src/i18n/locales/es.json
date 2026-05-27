@@ -35,7 +35,8 @@
     "valor": "Valor",
     "registrada": "Registrada",
     "no_lecturas": "Sin lecturas para esta zona.",
-    "guardar": "Registrar"
+    "guardar": "Registrar",
+    "eliminar": "Eliminar"
   },
   "cultivo": {
     "title": "Cultivos",
@@ -48,7 +49,9 @@
     "creado": "Registrado",
     "no_cultivos": "Sin cultivos para esta zona.",
     "guardar": "Guardar cultivo",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "editar": "Editar",
+    "eliminar": "Eliminar"
   },
   "umbral": {
     "title": "Umbrales ambientales",
@@ -61,7 +64,8 @@
     "actualizado": "Actualizado",
     "no_umbrales": "Sin umbrales definidos.",
     "guardar": "Guardar umbral",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "eliminar": "Eliminar"
   },
   "taiga": {
     "title": "Historias de usuario — Taiga",

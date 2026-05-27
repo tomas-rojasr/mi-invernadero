@@ -7,6 +7,7 @@
  */
 package com.tomasrojas.invernadero.api;
 
+import com.tomasrojas.invernadero.api.dto.ActualizarCultivoRequest;
 import com.tomasrojas.invernadero.api.dto.CrearCultivoRequest;
 import com.tomasrojas.invernadero.api.dto.CultivoResponse;
 import com.tomasrojas.invernadero.api.mapper.WebDtoMapper;
@@ -72,5 +73,37 @@ public class CultivoController {
                 service.crear(zonaId, request.nombre(), request.variedad(),
                         request.notas(), request.plantadoEn())
         );
+    }
+
+    /**
+     * Actualiza los datos de un cultivo existente.
+     *
+     * @param zonaId    identificador de la zona
+     * @param cultivoId identificador del cultivo
+     * @param request   nuevos datos del cultivo
+     * @return cultivo actualizado con HTTP 200
+     */
+    @PutMapping("/{cultivoId}")
+    @Operation(summary = "Actualizar un cultivo existente")
+    public CultivoResponse actualizar(
+            @PathVariable UUID zonaId,
+            @PathVariable UUID cultivoId,
+            @Valid @RequestBody ActualizarCultivoRequest request) {
+        return mapper.toCultivoResponse(
+                service.actualizar(cultivoId, request.nombre(), request.variedad(), request.notas())
+        );
+    }
+
+    /**
+     * Elimina un cultivo por su identificador.
+     *
+     * @param zonaId    identificador de la zona (mantiene la URL REST)
+     * @param cultivoId identificador del cultivo a eliminar
+     */
+    @DeleteMapping("/{cultivoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Eliminar un cultivo")
+    public void eliminar(@PathVariable UUID zonaId, @PathVariable UUID cultivoId) {
+        service.eliminar(cultivoId);
     }
 }

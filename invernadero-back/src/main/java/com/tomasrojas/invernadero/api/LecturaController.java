@@ -75,4 +75,17 @@ public class LecturaController {
                 service.registrar(zonaId, request.tipo(), request.valor())
         );
     }
+
+    /**
+     * Elimina una lectura por su identificador.
+     *
+     * @param zonaId    identificador de la zona (mantiene la URL REST)
+     * @param lecturaId identificador de la lectura a eliminar
+     */
+    @DeleteMapping("/{lecturaId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Eliminar una lectura ambiental")
+    public void eliminar(@PathVariable UUID zonaId, @PathVariable UUID lecturaId) {
+        service.eliminar(lecturaId);
+    }
 }

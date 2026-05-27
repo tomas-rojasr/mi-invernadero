@@ -10,6 +10,7 @@ package com.tomasrojas.invernadero.repository;
 import com.tomasrojas.invernadero.model.Cultivo;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,6 +33,21 @@ public interface CultivoPersistencePort {
      * @return lista de cultivos, vacía si la zona no tiene ninguno
      */
     List<Cultivo> listarPorZona(UUID zonaId);
+
+    /**
+     * Busca un cultivo por su identificador.
+     *
+     * @param id identificador del cultivo
+     * @return el cultivo encontrado, o vacío si no existe
+     */
+    Optional<Cultivo> buscarPorId(UUID id);
+
+    /**
+     * Elimina un cultivo por su identificador.
+     *
+     * @param id identificador del cultivo
+     */
+    void eliminarPorId(UUID id);
 
     /**
      * Elimina todos los cultivos asociados a una zona.

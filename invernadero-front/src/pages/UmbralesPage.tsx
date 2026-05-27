@@ -31,11 +31,19 @@ export default function UmbralesPage() {
     else setUmbrales([]);
   }, [zonaId]);
 
+  const recargar = (zId: string) => api.umbrales.listar(zId).then(r => setUmbrales(r.data));
+
   const definir = () => {
     if (!zonaId || !minimo || !maximo) { setError('Selecciona una zona, mínimo y máximo'); return; }
     setError('');
-    api.umbrales.definir(zonaId, { tipo, minimo: parseFloat(minimo), maximo: parseFloat(maximo) })
-      .then(() => { setMinimo(''); setMaximo(''); setMostrarForm(false); api.umbrales.listar(zonaId).then(r => setUmbrales(r.data)); })
+    api.umbrales.definir(zonaId, { tipo, valorMin: parseFloat(minimo), valorMax: parseFloat(maximo) })
+      .then(() => { setMinimo(''); setMaximo(''); setMostrarForm(false); recargar(zonaId); })
+      .catch(() => setError(t('error.generic')));
+  };
+
+  const eliminar = (umbralId: string) => {
+    api.umbrales.eliminar(zonaId, umbralId)
+      .then(() => recargar(zonaId))
       .catch(() => setError(t('error.generic')));
   };
 
@@ -85,19 +93,23 @@ export default function UmbralesPage() {
               <th style={s.th}>{t('umbral.minimo')}</th>
               <th style={s.th}>{t('umbral.maximo')}</th>
               <th style={s.th}>{t('umbral.actualizado')}</th>
+              <th style={s.th}></th>
             </tr>
           </thead>
           <tbody>
             {!zonaId ? (
-              <tr><td colSpan={4} style={s.empty}>{t('umbral.selecciona_zona')}</td></tr>
+              <tr><td colSpan={5} style={s.empty}>{t('umbral.selecciona_zona')}</td></tr>
             ) : umbrales.length === 0 ? (
-              <tr><td colSpan={4} style={s.empty}>{t('umbral.no_umbrales')}</td></tr>
+              <tr><td colSpan={5} style={s.empty}>{t('umbral.no_umbrales')}</td></tr>
             ) : umbrales.map(u => (
               <tr key={u.id} style={s.tr}>
                 <td style={s.td}>{t(`metricas.${u.tipo}`)}</td>
                 <td style={s.td}>{u.valorMin}</td>
                 <td style={s.td}>{u.valorMax}</td>
                 <td style={s.td}>{new Date(u.actualizadoEn).toLocaleString()}</td>
+                <td style={s.td}>
+                  <button style={s.btnDanger} onClick={() => eliminar(u.id)}>{t('umbral.eliminar')}</button>
+                </td>
               </tr>
             ))}
           </tbody>

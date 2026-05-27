@@ -30,11 +30,19 @@ export default function LecturasPage() {
     else setLecturas([]);
   }, [zonaId]);
 
+  const recargar = (zId: string) => api.lecturas.listar(zId).then(r => setLecturas(r.data));
+
   const registrar = () => {
     if (!zonaId || !valor) { setError('Selecciona una zona e ingresa un valor'); return; }
     setError('');
     api.lecturas.registrar(zonaId, { tipo, valor: parseFloat(valor) })
-      .then(() => { setValor(''); setMostrarForm(false); api.lecturas.listar(zonaId).then(r => setLecturas(r.data)); })
+      .then(() => { setValor(''); setMostrarForm(false); recargar(zonaId); })
+      .catch(() => setError(t('error.generic')));
+  };
+
+  const eliminar = (lecturaId: string) => {
+    api.lecturas.eliminar(zonaId, lecturaId)
+      .then(() => recargar(zonaId))
       .catch(() => setError(t('error.generic')));
   };
 
@@ -82,18 +90,22 @@ export default function LecturasPage() {
               <th style={s.th}>{t('lectura.tipo')}</th>
               <th style={s.th}>{t('lectura.valor')}</th>
               <th style={s.th}>{t('lectura.registrada')}</th>
+              <th style={s.th}></th>
             </tr>
           </thead>
           <tbody>
             {!zonaId ? (
-              <tr><td colSpan={3} style={s.empty}>{t('lectura.selecciona_zona')}</td></tr>
+              <tr><td colSpan={4} style={s.empty}>{t('lectura.selecciona_zona')}</td></tr>
             ) : lecturas.length === 0 ? (
-              <tr><td colSpan={3} style={s.empty}>{t('lectura.no_lecturas')}</td></tr>
+              <tr><td colSpan={4} style={s.empty}>{t('lectura.no_lecturas')}</td></tr>
             ) : lecturas.map(l => (
               <tr key={l.id} style={s.tr}>
                 <td style={s.td}>{t(`metricas.${l.tipo}`)}</td>
                 <td style={s.td}><strong>{l.valor}</strong></td>
                 <td style={s.td}>{new Date(l.registradoEn).toLocaleString()}</td>
+                <td style={s.td}>
+                  <button style={s.btnDanger} onClick={() => eliminar(l.id)}>{t('lectura.eliminar')}</button>
+                </td>
               </tr>
             ))}
           </tbody>

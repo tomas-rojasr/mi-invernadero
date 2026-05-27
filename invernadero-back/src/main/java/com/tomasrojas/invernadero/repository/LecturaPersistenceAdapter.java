@@ -63,6 +63,13 @@ public class LecturaPersistenceAdapter implements LecturaPersistencePort {
     /** {@inheritDoc} */
     @Override
     @Transactional
+    public void eliminarPorId(UUID id) {
+        jpaRepository.deleteById(id);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @Transactional
     public void eliminarPorZona(UUID zonaId) {
         jpaRepository.deleteByZonaId(zonaId);
     }

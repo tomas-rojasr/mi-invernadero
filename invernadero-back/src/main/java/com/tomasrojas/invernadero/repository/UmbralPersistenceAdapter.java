@@ -62,7 +62,14 @@ public class UmbralPersistenceAdapter implements UmbralPersistencePort {
     @Override
     @Transactional(readOnly = true)
     public Optional<UmbralAmbiental> buscarPorZonaYTipo(UUID zonaId, MetricaTipo tipo) {
-        return jpaRepository.findByZonaIdAndTipo(zonaId, tipo).map(mapper::toDomain);
+        return jpaRepository.findFirstByZonaIdAndTipo(zonaId, tipo).map(mapper::toDomain);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @Transactional
+    public void eliminarPorId(UUID id) {
+        jpaRepository.deleteById(id);
     }
 
     /** {@inheritDoc} */

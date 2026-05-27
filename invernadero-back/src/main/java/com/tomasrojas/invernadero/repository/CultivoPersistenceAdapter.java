@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -54,6 +55,20 @@ public class CultivoPersistenceAdapter implements CultivoPersistencePort {
         return jpaRepository.findByZonaIdOrderByCreadoEnDesc(zonaId).stream()
                 .map(mapper::toDomain)
                 .toList();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Cultivo> buscarPorId(UUID id) {
+        return jpaRepository.findById(id).map(mapper::toDomain);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @Transactional
+    public void eliminarPorId(UUID id) {
+        jpaRepository.deleteById(id);
     }
 
     /** {@inheritDoc} */

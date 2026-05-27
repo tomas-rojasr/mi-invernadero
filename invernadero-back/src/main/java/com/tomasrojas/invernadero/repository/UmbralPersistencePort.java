@@ -47,6 +47,13 @@ public interface UmbralPersistencePort {
     Optional<UmbralAmbiental> buscarPorZonaYTipo(UUID zonaId, MetricaTipo tipo);
 
     /**
+     * Elimina un umbral por su identificador.
+     *
+     * @param id identificador del umbral
+     */
+    void eliminarPorId(UUID id);
+
+    /**
      * Elimina todos los umbrales de una zona.
      * Se usa en cascada al eliminar una zona.
      *

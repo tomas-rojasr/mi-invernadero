@@ -87,4 +87,13 @@ public class UmbralApplicationService {
         }
         return umbralPort.listarPorZona(zonaId);
     }
+
+    /**
+     * Elimina un umbral por su identificador.
+     *
+     * @param umbralId identificador del umbral a eliminar
+     */
+    public void eliminar(UUID umbralId) {
+        umbralPort.eliminarPorId(umbralId);
+    }
 }
