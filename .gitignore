@@ -1,0 +1,27 @@
+# Maven
+invernadero-back/target/
+invernadero-back/.mvn/wrapper/maven-wrapper.jar
+!invernadero-back/.mvn/wrapper/maven-wrapper.properties
+
+# Node / React
+invernadero-front/node_modules/
+invernadero-front/dist/
+invernadero-front/.env
+invernadero-front/.env.local
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.class
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets (nunca subir)
+.env
+application-secrets.yaml

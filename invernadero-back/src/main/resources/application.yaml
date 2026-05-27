@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: invernadero-api
+
+  datasource:
+    url: jdbc:postgresql://${PGHOST:127.0.0.1}:${PGPORT:5432}/${PGDATABASE:invernadero_db}
+    username: ${PGUSER:invernadero_user}
+    password: ${PGPASSWORD:invernadero123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate: {}
+
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
+
+server:
+  port: ${PORT:8081}
+  forward-headers-strategy: framework
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  sample-data:
+    enabled: true
+  cors:
+    allowed-origins: ${APP_CORS_ORIGINS:http://localhost:5173}
+  security:
+    oauth2-enabled: false
+  oauth2:
+    post-login-redirect: ${APP_OAUTH2_POST_LOGIN:http://localhost:5173/panel}
+  taiga:
+    base-url: ${TAIGA_BASE_URL:https://api.taiga.io/api/v1}
+    personal-access-token: ${TAIGA_TOKEN:}
