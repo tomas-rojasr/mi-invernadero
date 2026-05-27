@@ -22,6 +22,12 @@ spring:
 server:
   port: ${PORT:8081}
   forward-headers-strategy: framework
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
+        http-only: true
 
 springdoc:
   api-docs:
