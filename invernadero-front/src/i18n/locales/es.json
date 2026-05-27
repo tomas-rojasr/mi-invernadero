@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "Invernadero Inteligente",
+    "loading": "Cargando..."
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "zonas": "Zonas",
+    "logout": "Cerrar sesión"
+  },
+  "login": {
+    "title": "Invernadero Inteligente",
+    "subtitle": "Sistema de gestión ambiental",
+    "button": "Iniciar sesión con Google",
+    "dev_note": "Modo desarrollo: sin autenticación"
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "welcome": "Bienvenido al sistema de invernadero",
+    "zonas_title": "Zonas registradas",
+    "no_zonas": "No hay zonas registradas aún.",
+    "add_zona": "Nueva zona",
+    "delete": "Eliminar",
+    "lecturas_title": "Últimas lecturas",
+    "no_lecturas": "Sin lecturas para esta zona."
+  },
+  "zona": {
+    "nombre": "Nombre",
+    "descripcion": "Descripción",
+    "creada": "Creada",
+    "guardar": "Guardar",
+    "cancelar": "Cancelar"
+  },
+  "lectura": {
+    "tipo": "Tipo de métrica",
+    "valor": "Valor",
+    "unidad": "Unidad",
+    "registrada": "Registrada",
+    "registrar": "Registrar lectura"
+  },
+  "error": {
+    "not_found": "Recurso no encontrado",
+    "generic": "Ocurrió un error inesperado",
+    "network": "No se pudo conectar con el servidor"
+  }
+}

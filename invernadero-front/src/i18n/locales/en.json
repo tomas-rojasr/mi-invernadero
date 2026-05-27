@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "Smart Greenhouse",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "zonas": "Zones",
+    "logout": "Log out"
+  },
+  "login": {
+    "title": "Smart Greenhouse",
+    "subtitle": "Environmental management system",
+    "button": "Sign in with Google",
+    "dev_note": "Dev mode: no authentication required"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to the greenhouse system",
+    "zonas_title": "Registered zones",
+    "no_zonas": "No zones registered yet.",
+    "add_zona": "New zone",
+    "delete": "Delete",
+    "lecturas_title": "Latest readings",
+    "no_lecturas": "No readings for this zone."
+  },
+  "zona": {
+    "nombre": "Name",
+    "descripcion": "Description",
+    "creada": "Created",
+    "guardar": "Save",
+    "cancelar": "Cancel"
+  },
+  "lectura": {
+    "tipo": "Metric type",
+    "valor": "Value",
+    "unidad": "Unit",
+    "registrada": "Recorded",
+    "registrar": "Record reading"
+  },
+  "error": {
+    "not_found": "Resource not found",
+    "generic": "An unexpected error occurred",
+    "network": "Could not connect to the server"
+  }
+}
