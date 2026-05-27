@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["mvn package -DskipTests --batch-mode"]
+
+[start]
+cmd = "java -jar target/invernadero-back-*.jar"
