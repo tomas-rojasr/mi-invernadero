@@ -7,6 +7,7 @@
  *              y permite cerrar sesión cuando OAuth2 está activo.
  */
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { s } from '../styles/shared';
 
@@ -16,6 +17,7 @@ const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8081';
 export default function PerfilPage() {
   const { t } = useTranslation();
   const { auth } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -50,13 +52,17 @@ export default function PerfilPage() {
           </tbody>
         </table>
 
-        {auth?.oauth2Enabled && (
-          <div style={{ marginTop: '1.5rem' }}>
+        <div style={{ marginTop: '1.5rem' }}>
+          {auth?.oauth2Enabled ? (
             <a href={`${BASE_URL}/logout`} style={s.btnDanger as React.CSSProperties}>
               {t('perfil.cerrar_sesion')}
             </a>
-          </div>
-        )}
+          ) : (
+            <button style={s.btnDanger} onClick={() => navigate('/login')}>
+              {t('perfil.cerrar_sesion')}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
