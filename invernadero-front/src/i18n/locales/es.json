@@ -1,46 +1,95 @@
 {
-  "app": {
-    "title": "Invernadero Inteligente",
-    "loading": "Cargando..."
-  },
+  "app": { "title": "Invernadero Inteligente", "loading": "Cargando..." },
   "nav": {
-    "dashboard": "Panel",
     "zonas": "Zonas",
-    "logout": "Cerrar sesión"
+    "lecturas": "Lecturas",
+    "cultivos": "Cultivos",
+    "umbrales": "Umbrales",
+    "taiga": "Taiga",
+    "perfil": "Perfil"
   },
   "login": {
     "title": "Invernadero Inteligente",
     "subtitle": "Sistema de gestión ambiental",
     "button": "Iniciar sesión con Google",
-    "dev_note": "Modo desarrollo: sin autenticación"
-  },
-  "dashboard": {
-    "title": "Panel de control",
-    "welcome": "Bienvenido al sistema de invernadero",
-    "zonas_title": "Zonas registradas",
-    "no_zonas": "No hay zonas registradas aún.",
-    "add_zona": "Nueva zona",
-    "delete": "Eliminar",
-    "lecturas_title": "Últimas lecturas",
-    "no_lecturas": "Sin lecturas para esta zona."
+    "dev_note": "Modo desarrollo — entrar al panel"
   },
   "zona": {
+    "title": "Zonas",
+    "nueva": "Nueva zona",
     "nombre": "Nombre",
     "descripcion": "Descripción",
     "creada": "Creada",
     "guardar": "Guardar",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "eliminar": "Eliminar",
+    "no_zonas": "No hay zonas registradas.",
+    "confirmar_eliminar": "¿Eliminar esta zona y todos sus datos?"
   },
   "lectura": {
+    "title": "Lecturas ambientales",
+    "registrar": "Registrar lectura",
+    "zona": "Zona",
+    "selecciona_zona": "Selecciona una zona",
     "tipo": "Tipo de métrica",
     "valor": "Valor",
-    "unidad": "Unidad",
     "registrada": "Registrada",
-    "registrar": "Registrar lectura"
+    "no_lecturas": "Sin lecturas para esta zona.",
+    "guardar": "Registrar"
+  },
+  "cultivo": {
+    "title": "Cultivos",
+    "nuevo": "Nuevo cultivo",
+    "zona": "Zona",
+    "selecciona_zona": "Selecciona una zona",
+    "nombre": "Nombre del cultivo",
+    "descripcion": "Descripción",
+    "plantado": "Fecha de siembra",
+    "creado": "Registrado",
+    "no_cultivos": "Sin cultivos para esta zona.",
+    "guardar": "Guardar cultivo",
+    "cancelar": "Cancelar"
+  },
+  "umbral": {
+    "title": "Umbrales ambientales",
+    "definir": "Definir umbral",
+    "zona": "Zona",
+    "selecciona_zona": "Selecciona una zona",
+    "tipo": "Métrica",
+    "minimo": "Mínimo",
+    "maximo": "Máximo",
+    "actualizado": "Actualizado",
+    "no_umbrales": "Sin umbrales definidos.",
+    "guardar": "Guardar umbral",
+    "cancelar": "Cancelar"
+  },
+  "taiga": {
+    "title": "Historias de usuario — Taiga",
+    "id_label": "ID de la historia",
+    "buscar": "Buscar",
+    "ref": "Referencia",
+    "subject": "Título",
+    "status": "Estado",
+    "no_result": "Ingresa el ID de una historia para buscarla.",
+    "error": "No se encontró la historia o el token no está configurado."
+  },
+  "perfil": {
+    "title": "Perfil",
+    "email": "Correo",
+    "estado": "Autenticado",
+    "oauth2": "OAuth2 activo",
+    "cerrar_sesion": "Cerrar sesión",
+    "dev_mode": "Modo desarrollo (sin OAuth2)"
   },
   "error": {
     "not_found": "Recurso no encontrado",
     "generic": "Ocurrió un error inesperado",
     "network": "No se pudo conectar con el servidor"
+  },
+  "metricas": {
+    "TEMPERATURA_C": "Temperatura (°C)",
+    "HUMEDAD_RELATIVA_PCT": "Humedad relativa (%)",
+    "LUZ_LUX": "Luz (lux)",
+    "HUMEDAD_SUELO_PCT": "Humedad suelo (%)"
   }
 }

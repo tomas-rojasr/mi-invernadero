@@ -51,6 +51,49 @@ export interface RegistrarLecturaRequest {
 
 // ── Endpoints ──────────────────────────────────────────────────────────────
 
+export interface Cultivo {
+  id: string;
+  zonaId: string;
+  nombre: string;
+  descripcion: string;
+  plantadoEn: string;
+  creadoEn: string;
+}
+
+export interface Umbral {
+  id: string;
+  zonaId: string;
+  tipo: string;
+  minimo: number;
+  maximo: number;
+  actualizadoEn: string;
+}
+
+export interface CrearCultivoRequest {
+  nombre: string;
+  descripcion: string;
+}
+
+export interface DefinirUmbralRequest {
+  tipo: string;
+  minimo: number;
+  maximo: number;
+}
+
+export interface TaigaHistoria {
+  id: number;
+  ref: number;
+  subject: string;
+  status: string;
+}
+
+export const METRICAS = [
+  'TEMPERATURA_C',
+  'HUMEDAD_RELATIVA_PCT',
+  'LUZ_LUX',
+  'HUMEDAD_SUELO_PCT',
+] as const;
+
 export const api = {
   auth: {
     status: () => client.get<AuthStatus>('/api/v1/auth/status'),
@@ -65,5 +108,21 @@ export const api = {
       client.get<Lectura[]>(`/api/v1/zonas/${zonaId}/lecturas`),
     registrar: (zonaId: string, body: RegistrarLecturaRequest) =>
       client.post<Lectura>(`/api/v1/zonas/${zonaId}/lecturas`, body),
+  },
+  cultivos: {
+    listar: (zonaId: string) =>
+      client.get<Cultivo[]>(`/api/v1/zonas/${zonaId}/cultivos`),
+    crear: (zonaId: string, body: CrearCultivoRequest) =>
+      client.post<Cultivo>(`/api/v1/zonas/${zonaId}/cultivos`, body),
+  },
+  umbrales: {
+    listar: (zonaId: string) =>
+      client.get<Umbral[]>(`/api/v1/zonas/${zonaId}/umbrales`),
+    definir: (zonaId: string, body: DefinirUmbralRequest) =>
+      client.put<Umbral>(`/api/v1/zonas/${zonaId}/umbrales`, body),
+  },
+  taiga: {
+    buscar: (id: number) =>
+      client.get<TaigaHistoria>(`/api/v1/taiga/historias/${id}`),
   },
 };

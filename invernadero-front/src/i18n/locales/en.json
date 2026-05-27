@@ -1,46 +1,95 @@
 {
-  "app": {
-    "title": "Smart Greenhouse",
-    "loading": "Loading..."
-  },
+  "app": { "title": "Smart Greenhouse", "loading": "Loading..." },
   "nav": {
-    "dashboard": "Dashboard",
     "zonas": "Zones",
-    "logout": "Log out"
+    "lecturas": "Readings",
+    "cultivos": "Crops",
+    "umbrales": "Thresholds",
+    "taiga": "Taiga",
+    "perfil": "Profile"
   },
   "login": {
     "title": "Smart Greenhouse",
     "subtitle": "Environmental management system",
     "button": "Sign in with Google",
-    "dev_note": "Dev mode: no authentication required"
-  },
-  "dashboard": {
-    "title": "Dashboard",
-    "welcome": "Welcome to the greenhouse system",
-    "zonas_title": "Registered zones",
-    "no_zonas": "No zones registered yet.",
-    "add_zona": "New zone",
-    "delete": "Delete",
-    "lecturas_title": "Latest readings",
-    "no_lecturas": "No readings for this zone."
+    "dev_note": "Dev mode — go to dashboard"
   },
   "zona": {
+    "title": "Zones",
+    "nueva": "New zone",
     "nombre": "Name",
     "descripcion": "Description",
     "creada": "Created",
     "guardar": "Save",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "eliminar": "Delete",
+    "no_zonas": "No zones registered yet.",
+    "confirmar_eliminar": "Delete this zone and all its data?"
   },
   "lectura": {
+    "title": "Environmental readings",
+    "registrar": "Record reading",
+    "zona": "Zone",
+    "selecciona_zona": "Select a zone",
     "tipo": "Metric type",
     "valor": "Value",
-    "unidad": "Unit",
-    "registrada": "Recorded",
-    "registrar": "Record reading"
+    "registrada": "Recorded at",
+    "no_lecturas": "No readings for this zone.",
+    "guardar": "Record"
+  },
+  "cultivo": {
+    "title": "Crops",
+    "nuevo": "New crop",
+    "zona": "Zone",
+    "selecciona_zona": "Select a zone",
+    "nombre": "Crop name",
+    "descripcion": "Description",
+    "plantado": "Planting date",
+    "creado": "Registered",
+    "no_cultivos": "No crops for this zone.",
+    "guardar": "Save crop",
+    "cancelar": "Cancel"
+  },
+  "umbral": {
+    "title": "Environmental thresholds",
+    "definir": "Define threshold",
+    "zona": "Zone",
+    "selecciona_zona": "Select a zone",
+    "tipo": "Metric",
+    "minimo": "Minimum",
+    "maximo": "Maximum",
+    "actualizado": "Updated",
+    "no_umbrales": "No thresholds defined.",
+    "guardar": "Save threshold",
+    "cancelar": "Cancel"
+  },
+  "taiga": {
+    "title": "User stories — Taiga",
+    "id_label": "Story ID",
+    "buscar": "Search",
+    "ref": "Reference",
+    "subject": "Title",
+    "status": "Status",
+    "no_result": "Enter a story ID to look it up.",
+    "error": "Story not found or token not configured."
+  },
+  "perfil": {
+    "title": "Profile",
+    "email": "Email",
+    "estado": "Authenticated",
+    "oauth2": "OAuth2 active",
+    "cerrar_sesion": "Log out",
+    "dev_mode": "Development mode (no OAuth2)"
   },
   "error": {
     "not_found": "Resource not found",
     "generic": "An unexpected error occurred",
     "network": "Could not connect to the server"
+  },
+  "metricas": {
+    "TEMPERATURA_C": "Temperature (°C)",
+    "HUMEDAD_RELATIVA_PCT": "Relative humidity (%)",
+    "LUZ_LUX": "Light (lux)",
+    "HUMEDAD_SUELO_PCT": "Soil moisture (%)"
   }
 }
