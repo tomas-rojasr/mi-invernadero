@@ -21,6 +21,7 @@ export default function LecturasPage() {
   const [mostrarForm, setMostrarForm] = useState(false);
   const [tipo, setTipo] = useState(METRICAS[0]);
   const [valor, setValor] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => { api.zonas.listar().then(r => setZonas(r.data)); }, []);
 
@@ -30,10 +31,11 @@ export default function LecturasPage() {
   }, [zonaId]);
 
   const registrar = () => {
-    if (!zonaId || !valor) return;
+    if (!zonaId || !valor) { setError('Selecciona una zona e ingresa un valor'); return; }
+    setError('');
     api.lecturas.registrar(zonaId, { tipo, valor: parseFloat(valor) })
-      .then(() => { setValor(''); api.lecturas.listar(zonaId).then(r => setLecturas(r.data)); })
-      .catch(() => {});
+      .then(() => { setValor(''); setMostrarForm(false); api.lecturas.listar(zonaId).then(r => setLecturas(r.data)); })
+      .catch(() => setError(t('error.generic')));
   };
 
   return (
@@ -44,6 +46,8 @@ export default function LecturasPage() {
           + {t('lectura.registrar')}
         </button>
       </div>
+
+      {error && <p style={s.errorMsg}>{error}</p>}
 
       {mostrarForm && (
         <div style={s.card}>

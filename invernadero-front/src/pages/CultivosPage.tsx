@@ -21,6 +21,7 @@ export default function CultivosPage() {
   const [mostrarForm, setMostrarForm] = useState(false);
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => { api.zonas.listar().then(r => setZonas(r.data)); }, []);
 
@@ -30,10 +31,11 @@ export default function CultivosPage() {
   }, [zonaId]);
 
   const crear = () => {
-    if (!zonaId || !nombre.trim()) return;
+    if (!zonaId || !nombre.trim()) { setError('Selecciona una zona e ingresa el nombre'); return; }
+    setError('');
     api.cultivos.crear(zonaId, { nombre, descripcion })
-      .then(() => { setNombre(''); setDescripcion(''); api.cultivos.listar(zonaId).then(r => setCultivos(r.data)); })
-      .catch(() => {});
+      .then(() => { setNombre(''); setDescripcion(''); setMostrarForm(false); api.cultivos.listar(zonaId).then(r => setCultivos(r.data)); })
+      .catch(() => setError(t('error.generic')));
   };
 
   return (
@@ -44,6 +46,8 @@ export default function CultivosPage() {
           + {t('cultivo.nuevo')}
         </button>
       </div>
+
+      {error && <p style={s.errorMsg}>{error}</p>}
 
       {mostrarForm && (
         <div style={s.card}>

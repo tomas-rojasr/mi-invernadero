@@ -51,6 +51,7 @@ public class LecturaPersistenceAdapter implements LecturaPersistencePort {
 
     /** {@inheritDoc} */
     @Override
+    @Transactional(readOnly = true)
     public List<LecturaAmbiental> listarPorZona(UUID zonaId, int limite) {
         return jpaRepository
                 .findByZonaIdOrderByRegistradoEnDesc(zonaId, PageRequest.of(0, limite))

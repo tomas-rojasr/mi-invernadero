@@ -49,6 +49,7 @@ public class CultivoPersistenceAdapter implements CultivoPersistencePort {
 
     /** {@inheritDoc} */
     @Override
+    @Transactional(readOnly = true)
     public List<Cultivo> listarPorZona(UUID zonaId) {
         return jpaRepository.findByZonaIdOrderByCreadoEnDesc(zonaId).stream()
                 .map(mapper::toDomain)

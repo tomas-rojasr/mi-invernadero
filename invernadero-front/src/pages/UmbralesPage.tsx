@@ -22,6 +22,7 @@ export default function UmbralesPage() {
   const [tipo, setTipo] = useState(METRICAS[0]);
   const [minimo, setMinimo] = useState('');
   const [maximo, setMaximo] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => { api.zonas.listar().then(r => setZonas(r.data)); }, []);
 
@@ -31,10 +32,11 @@ export default function UmbralesPage() {
   }, [zonaId]);
 
   const definir = () => {
-    if (!zonaId || !minimo || !maximo) return;
+    if (!zonaId || !minimo || !maximo) { setError('Selecciona una zona, mínimo y máximo'); return; }
+    setError('');
     api.umbrales.definir(zonaId, { tipo, minimo: parseFloat(minimo), maximo: parseFloat(maximo) })
-      .then(() => { setMinimo(''); setMaximo(''); api.umbrales.listar(zonaId).then(r => setUmbrales(r.data)); })
-      .catch(() => {});
+      .then(() => { setMinimo(''); setMaximo(''); setMostrarForm(false); api.umbrales.listar(zonaId).then(r => setUmbrales(r.data)); })
+      .catch(() => setError(t('error.generic')));
   };
 
   return (
@@ -45,6 +47,8 @@ export default function UmbralesPage() {
           + {t('umbral.definir')}
         </button>
       </div>
+
+      {error && <p style={s.errorMsg}>{error}</p>}
 
       {mostrarForm && (
         <div style={s.card}>
