@@ -6,8 +6,10 @@
  * Descripción: Contexto de autenticación global. Consulta el estado de
  *              sesión al backend y lo expone a toda la aplicación.
  */
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { api, AuthStatus } from '../api/client';
+import { createContext, useContext, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { api } from '../api/client';
+import type { AuthStatus } from '../api/client';
 
 interface AuthContextValue {
   auth: AuthStatus | null;

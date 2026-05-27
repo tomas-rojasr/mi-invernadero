@@ -8,7 +8,8 @@
  */
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { api, Zona, Lectura } from '../api/client';
+import { api } from '../api/client';
+import type { Zona, Lectura } from '../api/client';
 import LanguageToggle from '../components/LanguageToggle';
 
 /**
