@@ -25,3 +25,7 @@ Thumbs.db
 # Secrets (nunca subir)
 .env
 application-secrets.yaml
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
