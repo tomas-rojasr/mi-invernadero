@@ -8,7 +8,9 @@
  */
 package com.tomasrojas.invernadero.api;
 
+import com.tomasrojas.invernadero.config.AppProperties;
 import com.tomasrojas.invernadero.model.taiga.TaigaHistoriaUsuario;
+import com.tomasrojas.invernadero.model.taiga.TaigaProject;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Controller REST que actúa como proxy hacia la API de Taiga.io.
- *
- * <p>Cumple con el criterio 9 de la rúbrica: conectividad con Taiga para
- * validar historias de usuario y criterios de aceptación del proyecto.</p>
  */
 @RestController
 @RequestMapping("/api/v1/taiga")
@@ -30,22 +32,38 @@ import org.springframework.web.client.RestClient;
 public class TaigaController {
 
     private final RestClient taigaRestClient;
+    private final AppProperties appProperties;
 
-    /**
-     * @param taigaRestClient cliente REST preconfigurado para Taiga, inyectado por nombre
-     */
-    public TaigaController(@Qualifier("taigaRestClient") RestClient taigaRestClient) {
+    public TaigaController(@Qualifier("taigaRestClient") RestClient taigaRestClient,
+                           AppProperties appProperties) {
         this.taigaRestClient = taigaRestClient;
+        this.appProperties = appProperties;
     }
 
-    /**
-     * Consulta una historia de usuario en Taiga por su identificador numérico.
-     *
-     * @param id identificador numérico de la historia en Taiga
-     * @return la historia de usuario si existe
-     */
+    @GetMapping("/historias")
+    @Operation(summary = "Listar todas las historias del proyecto en Taiga.io")
+    public List<TaigaHistoriaUsuario> listarHistorias() {
+        String slug = appProperties.getTaiga().getProjectSlug();
+        if (slug == null || slug.isBlank()) {
+            return List.of();
+        }
+        try {
+            TaigaProject project = taigaRestClient.get()
+                    .uri("/projects/by_slug?slug={slug}", slug)
+                    .retrieve()
+                    .body(TaigaProject.class);
+            TaigaHistoriaUsuario[] historias = taigaRestClient.get()
+                    .uri("/userstories?project={id}", project.getId())
+                    .retrieve()
+                    .body(TaigaHistoriaUsuario[].class);
+            return historias != null ? Arrays.asList(historias) : List.of();
+        } catch (HttpClientErrorException.NotFound e) {
+            return List.of();
+        }
+    }
+
     @GetMapping("/historias/{id}")
-    @Operation(summary = "Consultar una historia de usuario en Taiga.io")
+    @Operation(summary = "Consultar una historia de usuario en Taiga.io por ID")
     public TaigaHistoriaUsuario obtenerHistoria(@PathVariable Long id) {
         try {
             return taigaRestClient.get()

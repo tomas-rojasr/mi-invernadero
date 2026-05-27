@@ -103,6 +103,9 @@ public class AppProperties {
         /** Token de acceso personal generado en Taiga → Perfil → Aplicaciones. */
         private String personalAccessToken = "";
 
+        /** Slug del proyecto en Taiga (ej. usuario-nombre-proyecto). */
+        private String projectSlug = "";
+
         /** @return URL base de la API de Taiga */
         public String getBaseUrl() { return baseUrl; }
 
@@ -116,6 +119,12 @@ public class AppProperties {
         public void setPersonalAccessToken(String personalAccessToken) {
             this.personalAccessToken = personalAccessToken;
         }
+
+        /** @return slug del proyecto en Taiga */
+        public String getProjectSlug() { return projectSlug; }
+
+        /** @param projectSlug slug del proyecto en Taiga */
+        public void setProjectSlug(String projectSlug) { this.projectSlug = projectSlug; }
     }
 
     /**

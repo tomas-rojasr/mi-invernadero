@@ -47,3 +47,4 @@ app:
   taiga:
     base-url: ${TAIGA_BASE_URL:https://api.taiga.io/api/v1}
     personal-access-token: ${TAIGA_TOKEN:}
+    project-slug: ${TAIGA_PROJECT_SLUG:}

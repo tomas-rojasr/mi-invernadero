@@ -92,7 +92,7 @@ export interface TaigaHistoria {
   id: number;
   ref: number;
   subject: string;
-  status: string;
+  statusNombre: string;
 }
 
 export const METRICAS = [
@@ -138,6 +138,7 @@ export const api = {
       client.delete(`/api/v1/zonas/${zonaId}/umbrales/${umbralId}`),
   },
   taiga: {
+    listar: () => client.get<TaigaHistoria[]>('/api/v1/taiga/historias'),
     buscar: (id: number) =>
       client.get<TaigaHistoria>(`/api/v1/taiga/historias/${id}`),
   },
