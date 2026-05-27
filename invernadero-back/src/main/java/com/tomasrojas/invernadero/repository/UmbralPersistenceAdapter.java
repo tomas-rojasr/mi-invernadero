@@ -43,6 +43,7 @@ public class UmbralPersistenceAdapter implements UmbralPersistencePort {
 
     /** {@inheritDoc} */
     @Override
+    @Transactional
     public UmbralAmbiental guardar(UmbralAmbiental umbral) {
         ZonaEntity zonaRef = zonaJpaRepository.getReferenceById(umbral.getZona().getId());
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(umbral, zonaRef)));

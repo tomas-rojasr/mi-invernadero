@@ -41,6 +41,7 @@ public class CultivoPersistenceAdapter implements CultivoPersistencePort {
 
     /** {@inheritDoc} */
     @Override
+    @Transactional
     public Cultivo guardar(Cultivo cultivo) {
         ZonaEntity zonaRef = zonaJpaRepository.getReferenceById(cultivo.getZona().getId());
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(cultivo, zonaRef)));

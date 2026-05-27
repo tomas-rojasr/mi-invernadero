@@ -42,6 +42,7 @@ public class LecturaPersistenceAdapter implements LecturaPersistencePort {
 
     /** {@inheritDoc} */
     @Override
+    @Transactional
     public LecturaAmbiental guardar(LecturaAmbiental lectura) {
         // Se obtiene la referencia JPA de la zona sin cargar todos sus campos (getReferenceById)
         ZonaEntity zonaRef = zonaJpaRepository.getReferenceById(lectura.getZona().getId());
