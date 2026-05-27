@@ -60,5 +60,10 @@ jobs:
     steps:
       - name: Disparar redespliegue en Render
         run: |
-          curl -s --fail "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
-          echo "Redespliegue iniciado en Render"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.RENDER_DEPLOY_HOOK_URL }}")
+          echo "Render respondió con HTTP $STATUS"
+          if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 400 ]; then
+            echo "Error al disparar el redespliegue"
+            exit 1
+          fi
+          echo "Redespliegue iniciado exitosamente"
