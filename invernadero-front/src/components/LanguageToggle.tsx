@@ -11,16 +11,29 @@ import { useTranslation } from 'react-i18next';
 /** Alterna el idioma de la interfaz entre ES y EN. */
 export default function LanguageToggle() {
   const { i18n } = useTranslation();
+  const esActivo = i18n.language.startsWith('es');
 
   const toggle = () => {
-    const next = i18n.language === 'es' ? 'en' : 'es';
+    const next = esActivo ? 'en' : 'es';
     i18n.changeLanguage(next);
     localStorage.setItem('lang', next);
   };
 
   return (
-    <button onClick={toggle} style={{ cursor: 'pointer' }}>
-      {i18n.language === 'es' ? 'EN' : 'ES'}
+    <button
+      onClick={toggle}
+      style={{
+        cursor: 'pointer',
+        padding: '4px 12px',
+        borderRadius: 6,
+        border: '1px solid #ccc',
+        background: '#fff',
+        fontWeight: 600,
+        fontSize: '0.85rem',
+        color: '#2d6a4f',
+      }}
+    >
+      {esActivo ? 'EN' : 'ES'}
     </button>
   );
 }

@@ -16,118 +16,79 @@ interface Campo {
   nullable?: boolean;
 }
 
-interface Entidad {
-  nombre: string;
-  color: string;
-  campos: Campo[];
-}
+const ZONA: Campo[] = [
+  { nombre: 'id',          tipo: 'UUID',      pk: true  },
+  { nombre: 'nombre',      tipo: 'String'               },
+  { nombre: 'descripcion', tipo: 'String',    nullable: true },
+  { nombre: 'ubicacion',   tipo: 'String',    nullable: true },
+  { nombre: 'tipo',        tipo: 'TipoZona',  nullable: true },
+  { nombre: 'area_m2',     tipo: 'Decimal',   nullable: true },
+  { nombre: 'creado_en',   tipo: 'Timestamp'             },
+];
 
-const ENTIDADES: Entidad[] = [
-  {
-    nombre: 'zona',
-    color: '#2d6a4f',
-    campos: [
-      { nombre: 'id', tipo: 'UUID', pk: true },
-      { nombre: 'nombre', tipo: 'String' },
-      { nombre: 'descripcion', tipo: 'String', nullable: true },
-      { nombre: 'ubicacion', tipo: 'String', nullable: true },
-      { nombre: 'tipo', tipo: 'TipoZona', nullable: true },
-      { nombre: 'area_m2', tipo: 'Decimal', nullable: true },
-      { nombre: 'creado_en', tipo: 'Timestamp' },
-    ],
-  },
-  {
-    nombre: 'cultivo',
-    color: '#40916c',
-    campos: [
-      { nombre: 'id', tipo: 'UUID', pk: true },
-      { nombre: 'zona_id', tipo: 'UUID', fk: true },
-      { nombre: 'nombre', tipo: 'String' },
-      { nombre: 'variedad', tipo: 'String', nullable: true },
-      { nombre: 'notas', tipo: 'String', nullable: true },
-      { nombre: 'plantado_en', tipo: 'Timestamp' },
-      { nombre: 'fecha_cosecha_estimada', tipo: 'Timestamp', nullable: true },
-      { nombre: 'area_m2', tipo: 'Decimal', nullable: true },
-      { nombre: 'cantidad_sembrada', tipo: 'Integer', nullable: true },
-      { nombre: 'rendimiento_esperado_kg', tipo: 'Decimal', nullable: true },
-      { nombre: 'estado', tipo: 'EstadoCultivo', nullable: true },
-      { nombre: 'creado_en', tipo: 'Timestamp' },
-    ],
-  },
-  {
-    nombre: 'lectura_ambiental',
-    color: '#1b4332',
-    campos: [
-      { nombre: 'id', tipo: 'UUID', pk: true },
-      { nombre: 'zona_id', tipo: 'UUID', fk: true },
-      { nombre: 'tipo', tipo: 'MetricaTipo' },
-      { nombre: 'valor', tipo: 'Decimal' },
-      { nombre: 'fuente', tipo: 'FuenteLectura' },
-      { nombre: 'notas', tipo: 'String', nullable: true },
-      { nombre: 'registrado_en', tipo: 'Timestamp' },
-    ],
-  },
-  {
-    nombre: 'umbral_ambiental',
-    color: '#52b788',
-    campos: [
-      { nombre: 'id', tipo: 'UUID', pk: true },
-      { nombre: 'zona_id', tipo: 'UUID', fk: true },
-      { nombre: 'tipo', tipo: 'MetricaTipo' },
-      { nombre: 'valor_min', tipo: 'Decimal' },
-      { nombre: 'valor_max', tipo: 'Decimal' },
-      { nombre: 'actualizado_en', tipo: 'Timestamp' },
-    ],
-  },
+const CULTIVO: Campo[] = [
+  { nombre: 'id',                      tipo: 'UUID',          pk: true  },
+  { nombre: 'zona_id',                 tipo: 'UUID',          fk: true  },
+  { nombre: 'nombre',                  tipo: 'String'                   },
+  { nombre: 'variedad',                tipo: 'String',        nullable: true },
+  { nombre: 'notas',                   tipo: 'String',        nullable: true },
+  { nombre: 'plantado_en',             tipo: 'Timestamp'                },
+  { nombre: 'fecha_cosecha_estimada',  tipo: 'Timestamp',     nullable: true },
+  { nombre: 'area_m2',                 tipo: 'Decimal',       nullable: true },
+  { nombre: 'cantidad_sembrada',       tipo: 'Integer',       nullable: true },
+  { nombre: 'rendimiento_esperado_kg', tipo: 'Decimal',       nullable: true },
+  { nombre: 'estado',                  tipo: 'EstadoCultivo', nullable: true },
+  { nombre: 'creado_en',               tipo: 'Timestamp'                },
+];
+
+const LECTURA: Campo[] = [
+  { nombre: 'id',            tipo: 'UUID',          pk: true },
+  { nombre: 'zona_id',       tipo: 'UUID',          fk: true },
+  { nombre: 'tipo',          tipo: 'MetricaTipo'             },
+  { nombre: 'valor',         tipo: 'Decimal'                 },
+  { nombre: 'fuente',        tipo: 'FuenteLectura'           },
+  { nombre: 'notas',         tipo: 'String',        nullable: true },
+  { nombre: 'registrado_en', tipo: 'Timestamp'               },
+];
+
+const UMBRAL: Campo[] = [
+  { nombre: 'id',             tipo: 'UUID',       pk: true },
+  { nombre: 'zona_id',        tipo: 'UUID',       fk: true },
+  { nombre: 'tipo',           tipo: 'MetricaTipo'          },
+  { nombre: 'valor_min',      tipo: 'Decimal'              },
+  { nombre: 'valor_max',      tipo: 'Decimal'              },
+  { nombre: 'actualizado_en', tipo: 'Timestamp'            },
 ];
 
 const ENUMS = [
-  { nombre: 'TipoZona', valores: ['INVERNADERO', 'CAMPO_ABIERTO', 'HIDROPONICO', 'MACETAS'] },
-  { nombre: 'EstadoCultivo', valores: ['ACTIVO', 'EN_PREPARACION', 'COSECHADO', 'PERDIDO'] },
-  { nombre: 'MetricaTipo', valores: ['TEMPERATURA_C', 'HUMEDAD_RELATIVA_PCT', 'LUZ_LUX', 'HUMEDAD_SUELO_PCT'] },
-  { nombre: 'FuenteLectura', valores: ['MANUAL', 'SENSOR_AUTOMATICO'] },
+  { nombre: 'TipoZona',      color: '#2d6a4f', valores: ['INVERNADERO', 'CAMPO_ABIERTO', 'HIDROPONICO', 'MACETAS'] },
+  { nombre: 'EstadoCultivo', color: '#40916c', valores: ['ACTIVO', 'EN_PREPARACION', 'COSECHADO', 'PERDIDO'] },
+  { nombre: 'MetricaTipo',   color: '#1b4332', valores: ['TEMPERATURA_C', 'HUMEDAD_RELATIVA_PCT', 'LUZ_LUX', 'HUMEDAD_SUELO_PCT'] },
+  { nombre: 'FuenteLectura', color: '#52b788', valores: ['MANUAL', 'SENSOR_AUTOMATICO'] },
 ];
 
-function TarjetaEntidad({ entidad }: { entidad: Entidad }) {
+function Tabla({ titulo, campos, color }: { titulo: string; campos: Campo[]; color: string }) {
   return (
-    <div style={styles.card}>
-      <div style={{ ...styles.cardHeader, background: entidad.color }}>
-        {entidad.nombre}
+    <div style={{ background: '#fff', borderRadius: 10, overflow: 'hidden', boxShadow: '0 3px 12px rgba(0,0,0,0.12)', minWidth: 280 }}>
+      <div style={{ background: color, color: '#fff', padding: '9px 16px', fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>
+        {titulo}
       </div>
-      <div style={styles.cardBody}>
-        {entidad.campos.map(c => (
-          <div key={c.nombre} style={styles.campo}>
-            <span style={styles.campoBadge}>
-              {c.pk && <span style={{ ...styles.badge, background: '#f4a261' }}>PK</span>}
-              {c.fk && <span style={{ ...styles.badge, background: '#e76f51' }}>FK</span>}
-            </span>
-            <span style={{ ...styles.campoNombre, opacity: c.nullable ? 0.65 : 1 }}>
-              {c.nombre}
-            </span>
-            <span style={styles.campoTipo}>{c.tipo}</span>
-            {c.nullable && <span style={styles.nullable}>nullable</span>}
-          </div>
-        ))}
-      </div>
+      {campos.map((c, i) => (
+        <div key={c.nombre} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '5px 14px', fontSize: '0.82rem', borderBottom: i < campos.length - 1 ? '1px solid #f0f0f0' : 'none', background: c.pk ? '#fffdf0' : c.fk ? '#fff8f5' : '#fff' }}>
+          {c.pk && <span style={badge('#e6a817')}>PK</span>}
+          {c.fk && <span style={badge('#e06c3a')}>FK</span>}
+          {!c.pk && !c.fk && <span style={{ width: 24 }} />}
+          <span style={{ flex: 1, fontFamily: 'monospace', color: c.nullable ? '#aaa' : '#222' }}>{c.nombre}</span>
+          <span style={{ fontFamily: 'monospace', fontSize: '0.76rem', color: '#2d6a4f', background: '#f0f9f4', padding: '1px 6px', borderRadius: 4 }}>{c.tipo}</span>
+          {c.nullable && <span style={{ fontSize: '0.68rem', color: '#bbb', fontStyle: 'italic' }}>null</span>}
+        </div>
+      ))}
     </div>
   );
 }
 
-function TarjetaEnum({ e }: { e: typeof ENUMS[0] }) {
-  return (
-    <div style={{ ...styles.card, minWidth: 180 }}>
-      <div style={{ ...styles.cardHeader, background: '#6c757d', fontSize: '0.8rem' }}>
-        «enum» {e.nombre}
-      </div>
-      <div style={styles.cardBody}>
-        {e.valores.map(v => (
-          <div key={v} style={{ ...styles.campo, justifyContent: 'flex-start' }}>
-            <span style={{ fontSize: '0.8rem', color: '#333' }}>{v}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+function badge(bg: string): React.CSSProperties {
+  return { background: bg, color: '#fff', fontSize: '0.62rem', fontWeight: 800, padding: '1px 5px', borderRadius: 3, minWidth: 22, textAlign: 'center' as const };
 }
 
 export default function DiagramaPage() {
@@ -135,150 +96,66 @@ export default function DiagramaPage() {
 
   return (
     <div>
-      <h2 style={{ marginBottom: '0.5rem', color: '#1b4332' }}>{t('diagrama.title')}</h2>
-      <p style={{ color: '#555', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-        {t('diagrama.subtitle')}
-      </p>
+      <h2 style={{ marginBottom: '0.3rem', color: '#1b4332' }}>{t('diagrama.title')}</h2>
+      <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: '0.88rem' }}>{t('diagrama.subtitle')}</p>
 
-      {/* Relación central: zona es la tabla principal */}
-      <div style={styles.legend}>
-        <span style={{ ...styles.badge, background: '#f4a261' }}>PK</span> Primary Key &nbsp;&nbsp;
-        <span style={{ ...styles.badge, background: '#e76f51' }}>FK</span> Foreign Key &nbsp;&nbsp;
-        <span style={styles.nullable}>campo</span> = nullable
+      {/* Leyenda */}
+      <div style={{ display: 'flex', gap: 16, marginBottom: '1.5rem', fontSize: '0.8rem', color: '#555', flexWrap: 'wrap' }}>
+        <span><span style={badge('#e6a817')}>PK</span> &nbsp;Primary Key</span>
+        <span><span style={badge('#e06c3a')}>FK</span> &nbsp;Foreign Key</span>
+        <span style={{ fontStyle: 'italic', color: '#aaa' }}>null = nullable</span>
+        <span style={{ marginLeft: 'auto', color: '#2d6a4f', fontWeight: 600 }}>Cardinalidad: 1 Zona → N registros</span>
       </div>
 
-      {/* Diagrama */}
-      <div style={styles.diagramWrapper}>
-        {/* Zona — tabla central */}
-        <div style={styles.zonaCenter}>
-          <TarjetaEntidad entidad={ENTIDADES[0]} />
+      {/* Diagrama principal */}
+      <div style={{ display: 'flex', gap: 0, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+
+        {/* Zona (izquierda) */}
+        <div style={{ flexShrink: 0 }}>
+          <Tabla titulo="zona" campos={ZONA} color="#1b4332" />
         </div>
 
-        {/* Tablas hijas */}
-        <div style={styles.hijas}>
-          {ENTIDADES.slice(1).map(e => (
-            <div key={e.nombre} style={styles.hijaWrapper}>
-              <div style={styles.relLine}>
-                <span style={styles.relLabel}>N : 1</span>
-              </div>
-              <TarjetaEntidad entidad={e} />
-            </div>
+        {/* Conector SVG central */}
+        <svg width="80" height="580" style={{ flexShrink: 0, overflow: 'visible', marginTop: 20 }}>
+          {/* línea vertical central */}
+          <line x1="40" y1="10" x2="40" y2="560" stroke="#2d6a4f" strokeWidth="2" strokeDasharray="6,3" />
+          {/* flechas hacia cada tabla hija */}
+          {[72, 270, 480].map((y, i) => (
+            <g key={i}>
+              <line x1="40" y1={y} x2="68" y2={y} stroke="#2d6a4f" strokeWidth="2" />
+              <polygon points={`${68},${y-5} ${80},${y} ${68},${y+5}`} fill="#2d6a4f" />
+              <rect x="0" y={y - 12} width="38" height="20" rx="4" fill="#d8f3dc" />
+              <text x="19" y={y + 4} textAnchor="middle" fontSize="9" fill="#1b4332" fontWeight="700">1 : N</text>
+            </g>
           ))}
+        </svg>
+
+        {/* Tablas hijas (derecha) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexShrink: 0 }}>
+          <Tabla titulo="cultivo" campos={CULTIVO} color="#40916c" />
+          <Tabla titulo="lectura_ambiental" campos={LECTURA} color="#1b4332" />
+          <Tabla titulo="umbral_ambiental" campos={UMBRAL} color="#52b788" />
         </div>
       </div>
 
       {/* Enums */}
-      <h3 style={{ marginTop: '2rem', marginBottom: '0.75rem', color: '#2d6a4f' }}>
+      <h3 style={{ marginTop: '2.5rem', marginBottom: '1rem', color: '#2d6a4f', fontSize: '1rem' }}>
         {t('diagrama.enums')}
       </h3>
-      <div style={styles.enumsWrapper}>
-        {ENUMS.map(e => <TarjetaEnum key={e.nombre} e={e} />)}
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        {ENUMS.map(e => (
+          <div key={e.nombre} style={{ background: '#fff', borderRadius: 8, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.09)', minWidth: 170 }}>
+            <div style={{ background: e.color, color: '#fff', padding: '6px 14px', fontSize: '0.78rem', fontWeight: 700 }}>
+              «enum» {e.nombre}
+            </div>
+            {e.valores.map(v => (
+              <div key={v} style={{ padding: '4px 14px', fontSize: '0.78rem', fontFamily: 'monospace', color: '#333', borderBottom: '1px solid #f5f5f5' }}>
+                {v}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  legend: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 4,
-    marginBottom: '1.2rem',
-    fontSize: '0.82rem',
-    color: '#555',
-  },
-  diagramWrapper: {
-    display: 'flex',
-    gap: '2.5rem',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
-  },
-  zonaCenter: {
-    flexShrink: 0,
-  },
-  hijas: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1.2rem',
-  },
-  hijaWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.6rem',
-  },
-  relLine: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 2,
-  },
-  relLabel: {
-    fontSize: '0.7rem',
-    color: '#888',
-    background: '#e9ecef',
-    padding: '2px 6px',
-    borderRadius: 4,
-    whiteSpace: 'nowrap',
-  },
-  card: {
-    background: '#fff',
-    borderRadius: 8,
-    boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
-    minWidth: 260,
-    overflow: 'hidden',
-  },
-  cardHeader: {
-    color: '#fff',
-    fontWeight: 700,
-    fontSize: '0.9rem',
-    padding: '8px 14px',
-    letterSpacing: '0.03em',
-    textTransform: 'uppercase' as const,
-  },
-  cardBody: {
-    padding: '6px 0',
-  },
-  campo: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 6,
-    padding: '4px 14px',
-    fontSize: '0.82rem',
-    borderBottom: '1px solid #f0f0f0',
-  },
-  campoBadge: {
-    display: 'flex',
-    gap: 3,
-    minWidth: 36,
-  },
-  campoNombre: {
-    flex: 1,
-    fontFamily: 'monospace',
-    color: '#222',
-  },
-  campoTipo: {
-    color: '#2d6a4f',
-    fontSize: '0.78rem',
-    fontFamily: 'monospace',
-    background: '#f0f9f4',
-    padding: '1px 5px',
-    borderRadius: 3,
-  },
-  nullable: {
-    fontSize: '0.7rem',
-    color: '#aaa',
-    fontStyle: 'italic',
-  },
-  badge: {
-    fontSize: '0.65rem',
-    color: '#fff',
-    padding: '1px 4px',
-    borderRadius: 3,
-    fontWeight: 700,
-  },
-  enumsWrapper: {
-    display: 'flex',
-    gap: '1rem',
-    flexWrap: 'wrap',
-  },
-};
