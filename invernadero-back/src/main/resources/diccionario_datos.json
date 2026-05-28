@@ -1,0 +1,414 @@
+{
+  "proyecto": "Smart Greenhouse — Invernadero Inteligente",
+  "version": "1.0.0",
+  "motor": "PostgreSQL 15",
+  "descripcion": "Diccionario de datos del sistema. Define las tablas, columnas, tipos, restricciones y enumeraciones del modelo relacional.",
+  "tablas": [
+    {
+      "nombre": "zonas",
+      "descripcion": "Espacio físico o lógico del invernadero. Es el agregado raíz del modelo: agrupa cultivos, lecturas y umbrales.",
+      "clase_entidad": "com.tomasrojas.invernadero.model.entity.ZonaEntity",
+      "clase_dominio": "com.tomasrojas.invernadero.model.Zona",
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": true,
+          "clave_foranea": false,
+          "generacion": "AUTO (GenerationType.UUID)",
+          "descripcion": "Identificador único de la zona, generado automáticamente por la base de datos."
+        },
+        {
+          "nombre": "nombre",
+          "tipo_sql": "VARCHAR(120)",
+          "tipo_java": "String",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@NotBlank, @Size(max=120)",
+          "descripcion": "Nombre descriptivo de la zona. Obligatorio, máximo 120 caracteres."
+        },
+        {
+          "nombre": "descripcion",
+          "tipo_sql": "VARCHAR(2000)",
+          "tipo_java": "String",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@Size(max=2000)",
+          "descripcion": "Descripción detallada del propósito o características de la zona. Opcional."
+        },
+        {
+          "nombre": "ubicacion",
+          "tipo_sql": "VARCHAR(200)",
+          "tipo_java": "String",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@Size(max=200)",
+          "descripcion": "Ubicación física dentro del invernadero. Opcional."
+        },
+        {
+          "nombre": "tipo",
+          "tipo_sql": "VARCHAR(20)",
+          "tipo_java": "com.tomasrojas.invernadero.model.TipoZona",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "enum": "TipoZona",
+          "descripcion": "Tipo de infraestructura de la zona. Almacenado como texto (EnumType.STRING). Opcional."
+        },
+        {
+          "nombre": "aream2",
+          "tipo_sql": "NUMERIC(8,2)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Área de la zona en metros cuadrados. Precisión de 8 dígitos con 2 decimales. Opcional."
+        },
+        {
+          "nombre": "creado_en",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "generacion": "@PrePersist — asignado automáticamente al insertar",
+          "descripcion": "Marca de tiempo UTC de creación del registro. No se puede actualizar."
+        }
+      ]
+    },
+    {
+      "nombre": "cultivos",
+      "descripcion": "Planta o cultivo registrado dentro de una zona. Tiene un ciclo de vida con estado (activo, cosechado, etc.).",
+      "clase_entidad": "com.tomasrojas.invernadero.model.entity.CultivoEntity",
+      "clase_dominio": "com.tomasrojas.invernadero.model.Cultivo",
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": true,
+          "clave_foranea": false,
+          "generacion": "AUTO (GenerationType.UUID)",
+          "descripcion": "Identificador único del cultivo."
+        },
+        {
+          "nombre": "zona_id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": true,
+          "referencia": "zonas(id)",
+          "descripcion": "Clave foránea hacia la zona a la que pertenece el cultivo. Relación N:1."
+        },
+        {
+          "nombre": "nombre",
+          "tipo_sql": "VARCHAR(200)",
+          "tipo_java": "String",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@NotBlank, @Size(max=200)",
+          "descripcion": "Nombre del cultivo (ej. Lechuga, Tomate). Obligatorio."
+        },
+        {
+          "nombre": "variedad",
+          "tipo_sql": "VARCHAR(120)",
+          "tipo_java": "String",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@Size(max=120)",
+          "descripcion": "Variedad específica del cultivo (ej. Batavia, Cherry). Opcional."
+        },
+        {
+          "nombre": "notas",
+          "tipo_sql": "VARCHAR(2000)",
+          "tipo_java": "String",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "validacion": "@Size(max=2000)",
+          "descripcion": "Notas de seguimiento o cuidados especiales. Opcional."
+        },
+        {
+          "nombre": "plantado_en",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Fecha y hora de siembra en UTC. Opcional."
+        },
+        {
+          "nombre": "fecha_cosecha_estimada",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Fecha estimada de cosecha en UTC. Opcional."
+        },
+        {
+          "nombre": "area_m2",
+          "tipo_sql": "NUMERIC(8,2)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Área sembrada en metros cuadrados. Opcional."
+        },
+        {
+          "nombre": "cantidad_sembrada",
+          "tipo_sql": "INTEGER",
+          "tipo_java": "Integer",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Cantidad de unidades o plantas sembradas. Opcional."
+        },
+        {
+          "nombre": "rendimiento_esperado_kg",
+          "tipo_sql": "NUMERIC(8,2)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Rendimiento esperado de la cosecha en kilogramos. Opcional."
+        },
+        {
+          "nombre": "estado",
+          "tipo_sql": "VARCHAR(20)",
+          "tipo_java": "com.tomasrojas.invernadero.model.EstadoCultivo",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "enum": "EstadoCultivo",
+          "descripcion": "Estado del ciclo de vida del cultivo. Almacenado como texto. Opcional."
+        },
+        {
+          "nombre": "creado_en",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "generacion": "@PrePersist — asignado automáticamente al insertar",
+          "descripcion": "Marca de tiempo UTC de registro en el sistema. No se puede actualizar."
+        }
+      ]
+    },
+    {
+      "nombre": "lecturas_ambientales",
+      "descripcion": "Medición ambiental puntual registrada en una zona. Puede provenir de un sensor automático o de entrada manual.",
+      "clase_entidad": "com.tomasrojas.invernadero.model.entity.LecturaEntity",
+      "clase_dominio": "com.tomasrojas.invernadero.model.LecturaAmbiental",
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": true,
+          "clave_foranea": false,
+          "generacion": "AUTO (GenerationType.UUID)",
+          "descripcion": "Identificador único de la lectura."
+        },
+        {
+          "nombre": "zona_id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": true,
+          "referencia": "zonas(id)",
+          "descripcion": "Clave foránea hacia la zona donde se tomó la medición. Relación N:1."
+        },
+        {
+          "nombre": "tipo",
+          "tipo_sql": "VARCHAR(30)",
+          "tipo_java": "com.tomasrojas.invernadero.model.MetricaTipo",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "enum": "MetricaTipo",
+          "descripcion": "Tipo de métrica medida. Obligatorio."
+        },
+        {
+          "nombre": "valor",
+          "tipo_sql": "NUMERIC(10,4)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Valor numérico de la medición. Obligatorio."
+        },
+        {
+          "nombre": "fuente",
+          "tipo_sql": "VARCHAR(20)",
+          "tipo_java": "com.tomasrojas.invernadero.model.FuenteLectura",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "enum": "FuenteLectura",
+          "descripcion": "Origen del dato: ingreso manual o sensor automático. Obligatorio."
+        },
+        {
+          "nombre": "notas",
+          "tipo_sql": "VARCHAR(500)",
+          "tipo_java": "String",
+          "nullable": true,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Observaciones adicionales sobre la lectura. Opcional."
+        },
+        {
+          "nombre": "registrado_en",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "generacion": "@PrePersist — asignado automáticamente al insertar",
+          "descripcion": "Marca de tiempo UTC de registro. Usado para ordenar lecturas de más reciente a más antigua."
+        }
+      ]
+    },
+    {
+      "nombre": "umbrales_ambientales",
+      "descripcion": "Rango mínimo y máximo aceptable para una métrica ambiental en una zona. Una zona tiene como máximo un umbral por tipo de métrica (upsert).",
+      "clase_entidad": "com.tomasrojas.invernadero.model.entity.UmbralEntity",
+      "clase_dominio": "com.tomasrojas.invernadero.model.UmbralAmbiental",
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": true,
+          "clave_foranea": false,
+          "generacion": "AUTO (GenerationType.UUID)",
+          "descripcion": "Identificador único del umbral."
+        },
+        {
+          "nombre": "zona_id",
+          "tipo_sql": "UUID",
+          "tipo_java": "java.util.UUID",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": true,
+          "referencia": "zonas(id)",
+          "descripcion": "Clave foránea hacia la zona a la que aplica el umbral. Relación N:1."
+        },
+        {
+          "nombre": "tipo",
+          "tipo_sql": "VARCHAR(30)",
+          "tipo_java": "com.tomasrojas.invernadero.model.MetricaTipo",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "enum": "MetricaTipo",
+          "descripcion": "Tipo de métrica al que aplica el umbral. Obligatorio."
+        },
+        {
+          "nombre": "valor_min",
+          "tipo_sql": "NUMERIC(8,2)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Valor mínimo aceptable para la métrica. Obligatorio."
+        },
+        {
+          "nombre": "valor_max",
+          "tipo_sql": "NUMERIC(8,2)",
+          "tipo_java": "java.math.BigDecimal",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "descripcion": "Valor máximo aceptable para la métrica. Obligatorio."
+        },
+        {
+          "nombre": "actualizado_en",
+          "tipo_sql": "TIMESTAMP WITH TIME ZONE",
+          "tipo_java": "java.time.Instant",
+          "nullable": false,
+          "clave_primaria": false,
+          "clave_foranea": false,
+          "generacion": "@PrePersist / @PreUpdate — actualizado automáticamente",
+          "descripcion": "Marca de tiempo UTC de la última actualización del umbral."
+        }
+      ]
+    }
+  ],
+  "enumeraciones": [
+    {
+      "nombre": "TipoZona",
+      "clase": "com.tomasrojas.invernadero.model.TipoZona",
+      "descripcion": "Tipo de infraestructura física de la zona del invernadero.",
+      "valores": [
+        { "valor": "INVERNADERO",   "descripcion": "Estructura cerrada con control climático." },
+        { "valor": "CAMPO_ABIERTO", "descripcion": "Zona expuesta al exterior sin cubierta." },
+        { "valor": "HIDROPONICO",   "descripcion": "Sistema de cultivo sin suelo en solución nutritiva." },
+        { "valor": "MACETAS",       "descripcion": "Cultivo en recipientes individuales." }
+      ]
+    },
+    {
+      "nombre": "EstadoCultivo",
+      "clase": "com.tomasrojas.invernadero.model.EstadoCultivo",
+      "descripcion": "Estado del ciclo de vida de un cultivo registrado en el sistema.",
+      "valores": [
+        { "valor": "ACTIVO",         "descripcion": "Cultivo en crecimiento normal." },
+        { "valor": "EN_PREPARACION", "descripcion": "Zona o sustrato en preparación antes de la siembra." },
+        { "valor": "COSECHADO",      "descripcion": "Cultivo que completó su ciclo y fue cosechado." },
+        { "valor": "PERDIDO",        "descripcion": "Cultivo que no prosperó por enfermedad, plaga u otro factor." }
+      ]
+    },
+    {
+      "nombre": "MetricaTipo",
+      "clase": "com.tomasrojas.invernadero.model.MetricaTipo",
+      "descripcion": "Tipo de variable ambiental que puede ser medida o controlada en una zona.",
+      "valores": [
+        { "valor": "TEMPERATURA_C",          "descripcion": "Temperatura del aire en grados Celsius." },
+        { "valor": "HUMEDAD_RELATIVA_PCT",   "descripcion": "Humedad relativa del aire en porcentaje (0-100)." },
+        { "valor": "LUZ_LUX",               "descripcion": "Intensidad luminosa en lux." },
+        { "valor": "HUMEDAD_SUELO_PCT",      "descripcion": "Humedad del suelo en porcentaje volumétrico (0-100)." }
+      ]
+    },
+    {
+      "nombre": "FuenteLectura",
+      "clase": "com.tomasrojas.invernadero.model.FuenteLectura",
+      "descripcion": "Origen del dato de una lectura ambiental registrada en el sistema.",
+      "valores": [
+        { "valor": "MANUAL",           "descripcion": "Valor ingresado manualmente por el usuario." },
+        { "valor": "SENSOR_AUTOMATICO","descripcion": "Valor capturado automáticamente por un sensor IoT." }
+      ]
+    }
+  ],
+  "relaciones": [
+    {
+      "desde": "cultivos.zona_id",
+      "hacia": "zonas.id",
+      "tipo": "N:1",
+      "descripcion": "Un cultivo pertenece a exactamente una zona. Una zona puede tener múltiples cultivos."
+    },
+    {
+      "desde": "lecturas_ambientales.zona_id",
+      "hacia": "zonas.id",
+      "tipo": "N:1",
+      "descripcion": "Una lectura pertenece a exactamente una zona. Una zona puede tener múltiples lecturas."
+    },
+    {
+      "desde": "umbrales_ambientales.zona_id",
+      "hacia": "zonas.id",
+      "tipo": "N:1",
+      "descripcion": "Un umbral pertenece a exactamente una zona. Una zona puede tener múltiples umbrales (uno por tipo de métrica)."
+    }
+  ]
+}
