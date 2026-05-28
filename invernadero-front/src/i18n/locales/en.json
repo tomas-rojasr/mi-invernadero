@@ -6,6 +6,7 @@
     "cultivos": "Crops",
     "umbrales": "Thresholds",
     "taiga": "Taiga",
+    "diagrama": "DB Diagram",
     "perfil": "Profile"
   },
   "login": {
@@ -120,6 +121,11 @@
     "not_found": "Resource not found",
     "generic": "An unexpected error occurred",
     "network": "Could not connect to the server"
+  },
+  "diagrama": {
+    "title": "Entity-Relationship Diagram",
+    "subtitle": "Database model of the system. One Zone groups multiple Crops, Readings and Thresholds.",
+    "enums": "Enumerated types"
   },
   "metricas": {
     "TEMPERATURA_C": "Temperature (°C)",

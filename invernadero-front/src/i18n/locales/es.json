@@ -6,6 +6,7 @@
     "cultivos": "Cultivos",
     "umbrales": "Umbrales",
     "taiga": "Taiga",
+    "diagrama": "Diagrama BD",
     "perfil": "Perfil"
   },
   "login": {
@@ -120,6 +121,11 @@
     "not_found": "Recurso no encontrado",
     "generic": "Ocurrió un error inesperado",
     "network": "No se pudo conectar con el servidor"
+  },
+  "diagrama": {
+    "title": "Diagrama Entidad-Relación",
+    "subtitle": "Modelo de base de datos del sistema. Una Zona agrupa múltiples Cultivos, Lecturas y Umbrales.",
+    "enums": "Tipos enumerados"
   },
   "metricas": {
     "TEMPERATURA_C": "Temperatura (°C)",

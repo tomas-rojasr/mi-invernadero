@@ -17,6 +17,7 @@ import CultivosPage from './pages/CultivosPage';
 import UmbralesPage from './pages/UmbralesPage';
 import TaigaPage from './pages/TaigaPage';
 import PerfilPage from './pages/PerfilPage';
+import DiagramaPage from './pages/DiagramaPage';
 import './i18n';
 
 /**
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="cultivos" element={<CultivosPage />} />
             <Route path="umbrales" element={<UmbralesPage />} />
             <Route path="taiga"    element={<TaigaPage />} />
+            <Route path="diagrama" element={<DiagramaPage />} />
             <Route path="perfil"   element={<PerfilPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/panel" replace />} />

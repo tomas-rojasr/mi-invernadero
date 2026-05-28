@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { to: '/panel/cultivos', key: 'nav.cultivos' },
   { to: '/panel/umbrales', key: 'nav.umbrales' },
   { to: '/panel/taiga',    key: 'nav.taiga' },
+  { to: '/panel/diagrama', key: 'nav.diagrama' },
   { to: '/panel/perfil',   key: 'nav.perfil' },
 ];
 
