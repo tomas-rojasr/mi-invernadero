@@ -35,8 +35,12 @@ export default function LoginPage() {
         <div style={styles.langRow}>
           <LanguageToggle />
         </div>
+
+        <div style={styles.iconWrap}>🌿</div>
         <h1 style={styles.title}>{t('login.title')}</h1>
         <p style={styles.subtitle}>{t('login.subtitle')}</p>
+
+        <div style={styles.divider} />
 
         {auth?.oauth2Enabled ? (
           <a href={`${BASE_URL}/oauth2/authorization/google`} style={styles.googleBtn}>
@@ -54,6 +58,8 @@ export default function LoginPage() {
             {t('login.dev_note')}
           </button>
         )}
+
+        <p style={styles.footer}>Electiva 1 · Ingeniería de Software</p>
       </div>
     </div>
   );
@@ -65,19 +71,26 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#f0f4f0',
+    background: 'linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 50%, #95d5b2 100%)',
   },
   card: {
     background: '#fff',
-    borderRadius: 12,
-    padding: '3rem 2.5rem',
-    boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
+    borderRadius: 20,
+    padding: '2.5rem 2.5rem 2rem',
+    boxShadow: '0 8px 40px rgba(45,106,79,0.15)',
     textAlign: 'center',
-    minWidth: 320,
+    minWidth: 340,
+    maxWidth: 400,
   },
-  langRow: { display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' },
-  title: { fontSize: '1.8rem', color: '#2d6a4f', marginBottom: '0.5rem' },
-  subtitle: { color: '#555', marginBottom: '2rem' },
+  langRow: { display: 'flex', justifyContent: 'flex-end', marginBottom: '0.5rem' },
+  iconWrap: { fontSize: '3rem', marginBottom: '0.5rem' },
+  title: { fontSize: '1.7rem', color: '#1b4332', fontWeight: 700, marginBottom: '0.4rem' },
+  subtitle: { color: '#666', fontSize: '0.95rem', marginBottom: '1.5rem' },
+  divider: {
+    height: 1,
+    background: '#e9ecef',
+    margin: '0 0 1.5rem',
+  },
   googleBtn: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -85,20 +98,17 @@ const styles: Record<string, React.CSSProperties> = {
     background: '#fff',
     color: '#3c4043',
     border: '1px solid #dadce0',
-    borderRadius: 4,
-    padding: '0.6rem 1.5rem',
+    borderRadius: 6,
+    padding: '0.7rem 1.8rem',
     fontSize: '0.95rem',
     fontWeight: 500,
     cursor: 'pointer',
     textDecoration: 'none',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.10)',
+    transition: 'box-shadow 0.2s',
     fontFamily: 'Roboto, sans-serif',
   },
-  googleIcon: {
-    width: 20,
-    height: 20,
-    flexShrink: 0,
-  },
+  googleIcon: { width: 20, height: 20, flexShrink: 0 },
   button: {
     display: 'inline-block',
     background: '#2d6a4f',
@@ -109,5 +119,10 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: '1rem',
     cursor: 'pointer',
     textDecoration: 'none',
+  },
+  footer: {
+    marginTop: '1.8rem',
+    fontSize: '0.75rem',
+    color: '#aaa',
   },
 };
