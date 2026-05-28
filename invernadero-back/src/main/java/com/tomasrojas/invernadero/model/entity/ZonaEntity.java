@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  ZonaEntity.java
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-14
  * Descripción: Entidad JPA que mapea la tabla "zonas" en la base de datos.
  *              Corresponde a la clase de dominio Zona.
  */

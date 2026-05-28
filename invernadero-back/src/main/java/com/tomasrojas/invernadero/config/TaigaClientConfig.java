@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  TaigaClientConfig.java
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-20
  * Descripción: Configura el cliente REST para consumir la API de Taiga.io.
  *              Inyecta el token de autenticación personal en cada petición.
  */

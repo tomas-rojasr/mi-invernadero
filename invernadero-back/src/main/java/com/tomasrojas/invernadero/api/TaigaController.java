@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  TaigaController.java
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-20
  * Descripción: Controller REST que consulta historias de usuario en Taiga.io
  *              para validar la conectividad y el estado del proyecto académico.
  */

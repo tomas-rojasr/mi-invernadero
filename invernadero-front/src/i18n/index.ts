@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  i18n/index.ts
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-19
  * Descripción: Configuración de internacionalización con i18next.
  *              Soporta español (predeterminado) e inglés.
  */

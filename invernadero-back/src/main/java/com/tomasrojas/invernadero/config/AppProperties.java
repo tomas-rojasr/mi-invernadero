@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  AppProperties.java
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-20
  * Descripción: Propiedades personalizadas del sistema mapeadas desde application.yaml.
  *              Centraliza la configuración de CORS, OAuth2 y Taiga en un único bean tipado.
  */

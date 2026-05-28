@@ -2,7 +2,7 @@
  * Proyecto: Invernadero Inteligente
  * Archivo:  OpenApiConfig.java
  * Autor:    Tomas Rojas
- * Fecha:    2026-05-26
+ * Fecha:    2026-05-20
  * Descripción: Configuración de Springdoc OpenAPI para generar la documentación
  *              interactiva del API en Swagger UI.
  */
