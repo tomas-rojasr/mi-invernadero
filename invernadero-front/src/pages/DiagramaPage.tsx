@@ -12,6 +12,8 @@ import {
   Background,
   Controls,
   MiniMap,
+  Handle,
+  Position,
   type NodeTypes,
   type Node,
   type Edge,
@@ -35,6 +37,8 @@ interface Campo {
 function EntidadNode({ data }: { data: { label: string; color: string; campos: Campo[] } }) {
   return (
     <div style={{ background: '#fff', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,0.15)', minWidth: 260, border: '1.5px solid #e0e0e0' }}>
+      <Handle type="target" position={Position.Left} style={{ background: '#555', width: 10, height: 10 }} />
+      <Handle type="source" position={Position.Right} style={{ background: '#555', width: 10, height: 10 }} />
       {/* Header */}
       <div style={{ background: data.color, color: '#fff', padding: '10px 16px', fontWeight: 800, fontSize: '0.88rem', letterSpacing: '0.06em', textTransform: 'uppercase' as const }}>
         {data.label}
@@ -70,6 +74,7 @@ function EntidadNode({ data }: { data: { label: string; color: string; campos: C
 function EnumNode({ data }: { data: { label: string; color: string; valores: string[] } }) {
   return (
     <div style={{ background: '#fff', borderRadius: 8, overflow: 'hidden', boxShadow: '0 3px 10px rgba(0,0,0,0.10)', minWidth: 170, border: '1.5px dashed #ccc' }}>
+      <Handle type="target" position={Position.Left} style={{ background: '#aaa', width: 8, height: 8 }} />
       <div style={{ background: data.color, color: '#fff', padding: '7px 14px', fontSize: '0.75rem', fontWeight: 700 }}>
         «enum» {data.label}
       </div>
