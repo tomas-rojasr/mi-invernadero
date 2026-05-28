@@ -105,6 +105,7 @@
     "buscar": "Search",
     "ref": "Reference",
     "subject": "Title",
+    "asignado": "Assigned to",
     "status": "Status",
     "no_result": "Enter a story ID to look it up.",
     "error": "Story not found or token not configured."

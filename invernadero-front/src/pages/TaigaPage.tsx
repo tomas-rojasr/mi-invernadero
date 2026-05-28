@@ -63,6 +63,7 @@ export default function TaigaPage() {
               <tr>
                 <th style={{ ...s.th, width: 60 }}>{t('taiga.ref')}</th>
                 <th style={s.th}>{t('taiga.subject')}</th>
+                <th style={{ ...s.th, width: 160 }}>{t('taiga.asignado')}</th>
                 <th style={{ ...s.th, width: 140 }}>{t('taiga.status')}</th>
               </tr>
             </thead>
@@ -71,6 +72,11 @@ export default function TaigaPage() {
                 <tr key={h.id} style={s.tr}>
                   <td style={{ ...s.td, color: '#888' }}>#{h.ref}</td>
                   <td style={s.td}>{h.subject}</td>
+                  <td style={s.td}>
+                    {h.asignadoA
+                      ? <span style={styles.asignado}>{h.asignadoA}</span>
+                      : <span style={{ color: '#aaa', fontSize: '0.82rem' }}>—</span>}
+                  </td>
                   <td style={s.td}>
                     <span style={{ ...styles.badge, ...badgeStyle(h.statusNombre) }}>
                       {h.statusNombre}
@@ -88,4 +94,15 @@ export default function TaigaPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   badge: { borderRadius: 12, padding: '2px 10px', fontSize: '0.82rem', fontWeight: 600 },
+  asignado: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 5,
+    fontSize: '0.83rem',
+    background: '#e8f4fd',
+    color: '#1a6496',
+    padding: '2px 8px',
+    borderRadius: 10,
+    fontWeight: 500,
+  },
 };

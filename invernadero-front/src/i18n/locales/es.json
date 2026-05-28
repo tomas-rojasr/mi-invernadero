@@ -105,6 +105,7 @@
     "buscar": "Buscar",
     "ref": "Referencia",
     "subject": "Título",
+    "asignado": "Asignado a",
     "status": "Estado",
     "no_result": "Ingresa el ID de una historia para buscarla.",
     "error": "No se encontró la historia o el token no está configurado."

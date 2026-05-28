@@ -24,6 +24,9 @@ public class TaigaHistoriaUsuario {
     @JsonProperty("status_extra_info")
     private StatusExtraInfo statusExtraInfo;
 
+    @JsonProperty("assigned_to_extra_info")
+    private AsignadoExtraInfo assignedToExtraInfo;
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class StatusExtraInfo {
         private String name;
@@ -31,9 +34,27 @@ public class TaigaHistoriaUsuario {
         public void setName(String name) { this.name = name; }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class AsignadoExtraInfo {
+        @JsonProperty("full_name_display")
+        private String fullNameDisplay;
+        private String username;
+
+        public String getFullNameDisplay() { return fullNameDisplay; }
+        public void setFullNameDisplay(String fullNameDisplay) { this.fullNameDisplay = fullNameDisplay; }
+        public String getUsername() { return username; }
+        public void setUsername(String username) { this.username = username; }
+    }
+
     public String getStatusNombre() {
         return statusExtraInfo != null && statusExtraInfo.getName() != null
                 ? statusExtraInfo.getName() : "—";
+    }
+
+    public String getAsignadoA() {
+        if (assignedToExtraInfo == null) return null;
+        String nombre = assignedToExtraInfo.getFullNameDisplay();
+        return (nombre != null && !nombre.isBlank()) ? nombre : assignedToExtraInfo.getUsername();
     }
 
     public Long getId() { return id; }
@@ -47,4 +68,7 @@ public class TaigaHistoriaUsuario {
 
     public StatusExtraInfo getStatusExtraInfo() { return statusExtraInfo; }
     public void setStatusExtraInfo(StatusExtraInfo statusExtraInfo) { this.statusExtraInfo = statusExtraInfo; }
+
+    public AsignadoExtraInfo getAssignedToExtraInfo() { return assignedToExtraInfo; }
+    public void setAssignedToExtraInfo(AsignadoExtraInfo assignedToExtraInfo) { this.assignedToExtraInfo = assignedToExtraInfo; }
 }

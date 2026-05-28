@@ -77,6 +77,7 @@ export interface TaigaHistoria {
   ref: number;
   subject: string;
   statusNombre: string;
+  asignadoA: string | null;
 }
 
 // ── Request interfaces ────────────────────────────────────────────────────
