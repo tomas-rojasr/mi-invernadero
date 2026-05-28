@@ -48,8 +48,11 @@ public class CultivoApplicationService {
      * @return el cultivo creado con su id asignado
      * @throws RecursoNoEncontradoException si la zona no existe
      */
-    public Cultivo crear(UUID zonaId, String nombre, String variedad,
-                         String notas, Instant plantadoEn) {
+    public Cultivo crear(UUID zonaId, String nombre, String variedad, String notas,
+                         Instant plantadoEn, Instant fechaCosechaEstimada,
+                         java.math.BigDecimal areaM2, Integer cantidadSembrada,
+                         java.math.BigDecimal rendimientoEsperadoKg,
+                         com.tomasrojas.invernadero.model.EstadoCultivo estado) {
         Zona zona = zonaPort.buscarPorId(zonaId)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Zona", zonaId));
 
@@ -59,6 +62,11 @@ public class CultivoApplicationService {
         cultivo.setVariedad(variedad);
         cultivo.setNotas(notas);
         cultivo.setPlantadoEn(plantadoEn != null ? plantadoEn : Instant.now());
+        cultivo.setFechaCosechaEstimada(fechaCosechaEstimada);
+        cultivo.setAreaM2(areaM2);
+        cultivo.setCantidadSembrada(cantidadSembrada);
+        cultivo.setRendimientoEsperadoKg(rendimientoEsperadoKg);
+        cultivo.setEstado(estado != null ? estado : com.tomasrojas.invernadero.model.EstadoCultivo.ACTIVO);
         return cultivoPort.guardar(cultivo);
     }
 
@@ -86,12 +94,20 @@ public class CultivoApplicationService {
      * @return el cultivo actualizado
      * @throws RecursoNoEncontradoException si el cultivo no existe
      */
-    public Cultivo actualizar(UUID cultivoId, String nombre, String variedad, String notas) {
+    public Cultivo actualizar(UUID cultivoId, String nombre, String variedad, String notas,
+                              Instant fechaCosechaEstimada, java.math.BigDecimal areaM2,
+                              Integer cantidadSembrada, java.math.BigDecimal rendimientoEsperadoKg,
+                              com.tomasrojas.invernadero.model.EstadoCultivo estado) {
         Cultivo cultivo = cultivoPort.buscarPorId(cultivoId)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Cultivo", cultivoId));
         cultivo.setNombre(nombre);
         cultivo.setVariedad(variedad);
         cultivo.setNotas(notas);
+        cultivo.setFechaCosechaEstimada(fechaCosechaEstimada);
+        cultivo.setAreaM2(areaM2);
+        cultivo.setCantidadSembrada(cantidadSembrada);
+        cultivo.setRendimientoEsperadoKg(rendimientoEsperadoKg);
+        cultivo.setEstado(estado);
         return cultivoPort.guardar(cultivo);
     }
 

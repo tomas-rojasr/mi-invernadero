@@ -7,10 +7,12 @@
  */
 package com.tomasrojas.invernadero.model.entity;
 
+import com.tomasrojas.invernadero.model.EstadoCultivo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -54,6 +56,27 @@ public class CultivoEntity {
     /** Fecha de siembra del cultivo en UTC. */
     @Column(name = "plantado_en")
     private Instant plantadoEn;
+
+    /** Fecha estimada de cosecha en UTC. */
+    @Column(name = "fecha_cosecha_estimada")
+    private Instant fechaCosechaEstimada;
+
+    /** Área sembrada en metros cuadrados. */
+    @Column(name = "area_m2", precision = 8, scale = 2)
+    private BigDecimal areaM2;
+
+    /** Cantidad de unidades sembradas. */
+    @Column(name = "cantidad_sembrada")
+    private Integer cantidadSembrada;
+
+    /** Rendimiento esperado en kilogramos. */
+    @Column(name = "rendimiento_esperado_kg", precision = 8, scale = 2)
+    private BigDecimal rendimientoEsperadoKg;
+
+    /** Estado del ciclo de vida del cultivo. */
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private EstadoCultivo estado;
 
     /** Marca de tiempo de registro en el sistema en UTC. */
     @Column(nullable = false, updatable = false)
@@ -103,9 +126,21 @@ public class CultivoEntity {
     /** @param plantadoEn fecha de siembra en UTC */
     public void setPlantadoEn(Instant plantadoEn) { this.plantadoEn = plantadoEn; }
 
-    /** @return la marca de tiempo de registro en UTC */
-    public Instant getCreadoEn() { return creadoEn; }
+    public Instant getFechaCosechaEstimada() { return fechaCosechaEstimada; }
+    public void setFechaCosechaEstimada(Instant fechaCosechaEstimada) { this.fechaCosechaEstimada = fechaCosechaEstimada; }
 
-    /** @param creadoEn marca de tiempo de registro en UTC */
+    public BigDecimal getAreaM2() { return areaM2; }
+    public void setAreaM2(BigDecimal areaM2) { this.areaM2 = areaM2; }
+
+    public Integer getCantidadSembrada() { return cantidadSembrada; }
+    public void setCantidadSembrada(Integer cantidadSembrada) { this.cantidadSembrada = cantidadSembrada; }
+
+    public BigDecimal getRendimientoEsperadoKg() { return rendimientoEsperadoKg; }
+    public void setRendimientoEsperadoKg(BigDecimal rendimientoEsperadoKg) { this.rendimientoEsperadoKg = rendimientoEsperadoKg; }
+
+    public EstadoCultivo getEstado() { return estado; }
+    public void setEstado(EstadoCultivo estado) { this.estado = estado; }
+
+    public Instant getCreadoEn() { return creadoEn; }
     public void setCreadoEn(Instant creadoEn) { this.creadoEn = creadoEn; }
 }

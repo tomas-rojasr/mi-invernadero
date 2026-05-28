@@ -63,6 +63,9 @@ class ZonaApplicationServiceTest {
                 UUID.randomUUID(),
                 "Zona Norte",
                 "Zona de prueba",
+                null,
+                null,
+                null,
                 Instant.now()
         );
     }
@@ -72,7 +75,7 @@ class ZonaApplicationServiceTest {
     void crear_debePersistirYRetornarZona() {
         when(zonaPort.guardar(any(Zona.class))).thenReturn(zonaDemo);
 
-        Zona resultado = service.crear("Zona Norte", "Zona de prueba");
+        Zona resultado = service.crear("Zona Norte", "Zona de prueba", null, null, null);
 
         assertThat(resultado.getNombre()).isEqualTo("Zona Norte");
         assertThat(resultado.getDescripcion()).isEqualTo("Zona de prueba");

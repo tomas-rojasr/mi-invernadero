@@ -52,7 +52,9 @@ public class LecturaApplicationService {
      * @return la lectura registrada con su id y marca de tiempo asignados
      * @throws RecursoNoEncontradoException si la zona no existe
      */
-    public LecturaAmbiental registrar(UUID zonaId, MetricaTipo tipo, BigDecimal valor) {
+    public LecturaAmbiental registrar(UUID zonaId, MetricaTipo tipo, BigDecimal valor,
+                                       com.tomasrojas.invernadero.model.FuenteLectura fuente,
+                                       String notas) {
         Zona zona = zonaPort.buscarPorId(zonaId)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Zona", zonaId));
 
@@ -60,6 +62,8 @@ public class LecturaApplicationService {
         lectura.setZona(zona);
         lectura.setTipo(tipo);
         lectura.setValor(valor);
+        lectura.setFuente(fuente != null ? fuente : com.tomasrojas.invernadero.model.FuenteLectura.MANUAL);
+        lectura.setNotas(notas);
         return lecturaPort.guardar(lectura);
     }
 

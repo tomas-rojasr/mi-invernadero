@@ -7,20 +7,12 @@
  */
 package com.tomasrojas.invernadero.api.dto;
 
+import com.tomasrojas.invernadero.model.EstadoCultivo;
+
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * Representación de un cultivo devuelta por la API REST.
- *
- * @param id         identificador único del cultivo
- * @param zonaId     identificador de la zona a la que pertenece
- * @param nombre     nombre del cultivo
- * @param variedad   variedad del cultivo (puede ser null)
- * @param notas      notas de seguimiento (puede ser null)
- * @param plantadoEn fecha de siembra en UTC
- * @param creadoEn   fecha de registro en el sistema en UTC
- */
 public record CultivoResponse(
         UUID id,
         UUID zonaId,
@@ -28,5 +20,10 @@ public record CultivoResponse(
         String variedad,
         String notas,
         Instant plantadoEn,
+        Instant fechaCosechaEstimada,
+        BigDecimal areaM2,
+        Integer cantidadSembrada,
+        BigDecimal rendimientoEsperadoKg,
+        EstadoCultivo estado,
         Instant creadoEn
 ) {}

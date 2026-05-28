@@ -8,10 +8,12 @@
  */
 package com.tomasrojas.invernadero.model.entity;
 
+import com.tomasrojas.invernadero.model.TipoZona;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -44,6 +46,20 @@ public class ZonaEntity {
     @Column(length = 2000)
     private String descripcion;
 
+    /** Ubicación física de la zona dentro del invernadero. */
+    @Size(max = 200)
+    @Column(length = 200)
+    private String ubicacion;
+
+    /** Tipo de infraestructura de la zona. */
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private TipoZona tipo;
+
+    /** Área de la zona en metros cuadrados. */
+    @Column(precision = 8, scale = 2)
+    private BigDecimal areaM2;
+
     /** Marca de tiempo de creación. Se asigna antes de persistir por primera vez. */
     @Column(nullable = false, updatable = false)
     private Instant creadoEn;
@@ -74,9 +90,15 @@ public class ZonaEntity {
     /** @param descripcion descripción de la zona */
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    /** @return la marca de tiempo de creación en UTC */
-    public Instant getCreadoEn() { return creadoEn; }
+    public String getUbicacion() { return ubicacion; }
+    public void setUbicacion(String ubicacion) { this.ubicacion = ubicacion; }
 
-    /** @param creadoEn marca de tiempo de creación en UTC */
+    public TipoZona getTipo() { return tipo; }
+    public void setTipo(TipoZona tipo) { this.tipo = tipo; }
+
+    public BigDecimal getAreaM2() { return areaM2; }
+    public void setAreaM2(BigDecimal areaM2) { this.areaM2 = areaM2; }
+
+    public Instant getCreadoEn() { return creadoEn; }
     public void setCreadoEn(Instant creadoEn) { this.creadoEn = creadoEn; }
 }

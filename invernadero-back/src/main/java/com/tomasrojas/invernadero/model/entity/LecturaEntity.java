@@ -7,9 +7,11 @@
  */
 package com.tomasrojas.invernadero.model.entity;
 
+import com.tomasrojas.invernadero.model.FuenteLectura;
 import com.tomasrojas.invernadero.model.MetricaTipo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -51,6 +53,16 @@ public class LecturaEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
 
+    /** Origen de la lectura (manual o sensor automático). */
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private FuenteLectura fuente = FuenteLectura.MANUAL;
+
+    /** Notas adicionales sobre la lectura. */
+    @Size(max = 500)
+    @Column(length = 500)
+    private String notas;
+
     /** Instante exacto del registro en UTC. */
     @Column(nullable = false, updatable = false)
     private Instant registradoEn;
@@ -87,9 +99,12 @@ public class LecturaEntity {
     /** @param valor valor de la medición */
     public void setValor(BigDecimal valor) { this.valor = valor; }
 
-    /** @return el instante de registro en UTC */
-    public Instant getRegistradoEn() { return registradoEn; }
+    public FuenteLectura getFuente() { return fuente; }
+    public void setFuente(FuenteLectura fuente) { this.fuente = fuente; }
 
-    /** @param registradoEn instante de registro en UTC */
+    public String getNotas() { return notas; }
+    public void setNotas(String notas) { this.notas = notas; }
+
+    public Instant getRegistradoEn() { return registradoEn; }
     public void setRegistradoEn(Instant registradoEn) { this.registradoEn = registradoEn; }
 }

@@ -7,24 +7,16 @@
  */
 package com.tomasrojas.invernadero.api.dto;
 
+import com.tomasrojas.invernadero.model.TipoZona;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-/**
- * Datos requeridos en el cuerpo de la petición {@code POST /api/v1/zonas}.
- *
- * <p>Las anotaciones de validación son procesadas por Spring antes de
- * llegar al controller; si fallan, {@code RestExceptionHandler} devuelve 400.</p>
- *
- * @param nombre      nombre de la zona (obligatorio, máximo 120 caracteres)
- * @param descripcion descripción de la zona (opcional, máximo 2000 caracteres)
- */
+import java.math.BigDecimal;
+
 public record CrearZonaRequest(
-
-        @NotBlank(message = "El nombre de la zona es obligatorio")
-        @Size(max = 120, message = "El nombre no puede superar los 120 caracteres")
-        String nombre,
-
-        @Size(max = 2000, message = "La descripción no puede superar los 2000 caracteres")
-        String descripcion
+        @NotBlank @Size(max = 120) String nombre,
+        @Size(max = 2000) String descripcion,
+        @Size(max = 200) String ubicacion,
+        TipoZona tipo,
+        BigDecimal areaM2
 ) {}

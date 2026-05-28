@@ -19,12 +19,22 @@
     "nueva": "Nueva zona",
     "nombre": "Nombre",
     "descripcion": "Descripción",
+    "ubicacion": "Ubicación",
+    "tipo": "Tipo",
+    "tipo_placeholder": "Tipo de zona (opcional)",
+    "area_m2": "Área (m²)",
     "creada": "Creada",
     "guardar": "Guardar",
     "cancelar": "Cancelar",
     "eliminar": "Eliminar",
     "no_zonas": "No hay zonas registradas.",
     "confirmar_eliminar": "¿Eliminar esta zona y todos sus datos?"
+  },
+  "tipoZona": {
+    "INVERNADERO": "Invernadero",
+    "CAMPO_ABIERTO": "Campo abierto",
+    "HIDROPONICO": "Hidropónico",
+    "MACETAS": "Macetas"
   },
   "lectura": {
     "title": "Lecturas ambientales",
@@ -33,10 +43,17 @@
     "selecciona_zona": "Selecciona una zona",
     "tipo": "Tipo de métrica",
     "valor": "Valor",
+    "fuente": "Fuente",
+    "notas": "Notas (opcional)",
     "registrada": "Registrada",
     "no_lecturas": "Sin lecturas para esta zona.",
     "guardar": "Registrar",
-    "eliminar": "Eliminar"
+    "eliminar": "Eliminar",
+    "error_campos": "Selecciona una zona e ingresa un valor"
+  },
+  "fuente": {
+    "MANUAL": "Manual",
+    "SENSOR_AUTOMATICO": "Sensor automático"
   },
   "cultivo": {
     "title": "Cultivos",
@@ -44,14 +61,28 @@
     "zona": "Zona",
     "selecciona_zona": "Selecciona una zona",
     "nombre": "Nombre del cultivo",
-    "descripcion": "Descripción",
+    "variedad": "Variedad (opcional)",
+    "notas": "Notas (opcional)",
     "plantado": "Fecha de siembra",
+    "fecha_cosecha": "Cosecha estimada",
+    "area_m2": "Área (m²)",
+    "cantidad_sembrada": "Cantidad sembrada",
+    "rendimiento_kg": "Rendimiento esperado (kg)",
+    "estado": "Estado",
+    "estado_placeholder": "Estado (opcional)",
     "creado": "Registrado",
     "no_cultivos": "Sin cultivos para esta zona.",
     "guardar": "Guardar cultivo",
     "cancelar": "Cancelar",
     "editar": "Editar",
-    "eliminar": "Eliminar"
+    "eliminar": "Eliminar",
+    "error_campos": "Selecciona una zona e ingresa el nombre"
+  },
+  "estadoCultivo": {
+    "ACTIVO": "Activo",
+    "EN_PREPARACION": "En preparación",
+    "COSECHADO": "Cosechado",
+    "PERDIDO": "Perdido"
   },
   "umbral": {
     "title": "Umbrales ambientales",

@@ -24,10 +24,17 @@ export interface AuthStatus {
   email?: string;
 }
 
+export type TipoZona = 'CAMPO_ABIERTO' | 'INVERNADERO' | 'HIDROPONICO' | 'MACETAS';
+export type FuenteLectura = 'MANUAL' | 'SENSOR_AUTOMATICO';
+export type EstadoCultivo = 'ACTIVO' | 'EN_PREPARACION' | 'COSECHADO' | 'PERDIDO';
+
 export interface Zona {
   id: string;
   nombre: string;
   descripcion: string;
+  ubicacion: string | null;
+  tipo: TipoZona | null;
+  areaM2: number | null;
   creadoEn: string;
 }
 
@@ -36,20 +43,10 @@ export interface Lectura {
   zonaId: string;
   tipo: string;
   valor: number;
+  fuente: FuenteLectura;
+  notas: string | null;
   registradoEn: string;
 }
-
-export interface CrearZonaRequest {
-  nombre: string;
-  descripcion: string;
-}
-
-export interface RegistrarLecturaRequest {
-  tipo: string;
-  valor: number;
-}
-
-// ── Endpoints ──────────────────────────────────────────────────────────────
 
 export interface Cultivo {
   id: string;
@@ -58,6 +55,11 @@ export interface Cultivo {
   variedad: string | null;
   notas: string | null;
   plantadoEn: string;
+  fechaCosechaEstimada: string | null;
+  areaM2: number | null;
+  cantidadSembrada: number | null;
+  rendimientoEsperadoKg: number | null;
+  estado: EstadoCultivo | null;
   creadoEn: string;
 }
 
@@ -70,16 +72,51 @@ export interface Umbral {
   actualizadoEn: string;
 }
 
+export interface TaigaHistoria {
+  id: number;
+  ref: number;
+  subject: string;
+  statusNombre: string;
+}
+
+// ── Request interfaces ────────────────────────────────────────────────────
+
+export interface CrearZonaRequest {
+  nombre: string;
+  descripcion: string;
+  ubicacion?: string;
+  tipo?: TipoZona;
+  areaM2?: number;
+}
+
+export interface RegistrarLecturaRequest {
+  tipo: string;
+  valor: number;
+  fuente?: FuenteLectura;
+  notas?: string;
+}
+
 export interface CrearCultivoRequest {
   nombre: string;
   variedad?: string;
   notas?: string;
+  plantadoEn?: string;
+  fechaCosechaEstimada?: string;
+  areaM2?: number;
+  cantidadSembrada?: number;
+  rendimientoEsperadoKg?: number;
+  estado?: EstadoCultivo;
 }
 
 export interface ActualizarCultivoRequest {
   nombre: string;
   variedad?: string;
   notas?: string;
+  fechaCosechaEstimada?: string;
+  areaM2?: number;
+  cantidadSembrada?: number;
+  rendimientoEsperadoKg?: number;
+  estado?: EstadoCultivo;
 }
 
 export interface DefinirUmbralRequest {
@@ -88,12 +125,7 @@ export interface DefinirUmbralRequest {
   valorMax: number;
 }
 
-export interface TaigaHistoria {
-  id: number;
-  ref: number;
-  subject: string;
-  statusNombre: string;
-}
+// ── Constantes ────────────────────────────────────────────────────────────
 
 export const METRICAS = [
   'TEMPERATURA_C',
@@ -101,6 +133,12 @@ export const METRICAS = [
   'LUZ_LUX',
   'HUMEDAD_SUELO_PCT',
 ] as const;
+
+export const TIPOS_ZONA: TipoZona[] = ['INVERNADERO', 'CAMPO_ABIERTO', 'HIDROPONICO', 'MACETAS'];
+export const FUENTES_LECTURA: FuenteLectura[] = ['MANUAL', 'SENSOR_AUTOMATICO'];
+export const ESTADOS_CULTIVO: EstadoCultivo[] = ['ACTIVO', 'EN_PREPARACION', 'COSECHADO', 'PERDIDO'];
+
+// ── Endpoints ─────────────────────────────────────────────────────────────
 
 export const api = {
   auth: {

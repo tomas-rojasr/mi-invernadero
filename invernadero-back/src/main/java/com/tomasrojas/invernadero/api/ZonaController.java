@@ -69,7 +69,8 @@ public class ZonaController {
     @Operation(summary = "Crear una nueva zona")
     public ZonaResponse crear(@Valid @RequestBody CrearZonaRequest request) {
         return mapper.toZonaResponse(
-                service.crear(request.nombre(), request.descripcion())
+                service.crear(request.nombre(), request.descripcion(),
+                        request.ubicacion(), request.tipo(), request.areaM2())
         );
     }
 

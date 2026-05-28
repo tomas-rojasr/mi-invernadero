@@ -36,6 +36,9 @@ public class WebDtoMapper {
                 zona.getId(),
                 zona.getNombre(),
                 zona.getDescripcion(),
+                zona.getUbicacion(),
+                zona.getTipo(),
+                zona.getAreaM2(),
                 zona.getCreadoEn()
         );
     }
@@ -52,6 +55,8 @@ public class WebDtoMapper {
                 lectura.getZona().getId(),
                 lectura.getTipo(),
                 lectura.getValor(),
+                lectura.getFuente(),
+                lectura.getNotas(),
                 lectura.getRegistradoEn()
         );
     }
@@ -70,6 +75,11 @@ public class WebDtoMapper {
                 cultivo.getVariedad(),
                 cultivo.getNotas(),
                 cultivo.getPlantadoEn(),
+                cultivo.getFechaCosechaEstimada(),
+                cultivo.getAreaM2(),
+                cultivo.getCantidadSembrada(),
+                cultivo.getRendimientoEsperadoKg(),
+                cultivo.getEstado(),
                 cultivo.getCreadoEn()
         );
     }

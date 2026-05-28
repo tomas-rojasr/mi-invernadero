@@ -72,7 +72,7 @@ public class LecturaController {
             @PathVariable UUID zonaId,
             @Valid @RequestBody RegistrarLecturaRequest request) {
         return mapper.toLecturaResponse(
-                service.registrar(zonaId, request.tipo(), request.valor())
+                service.registrar(zonaId, request.tipo(), request.valor(), request.fuente(), request.notas())
         );
     }
 

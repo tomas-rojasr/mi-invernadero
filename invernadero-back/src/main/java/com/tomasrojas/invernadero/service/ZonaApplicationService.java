@@ -59,10 +59,15 @@ public class ZonaApplicationService {
      * @param descripcion descripción de la zona
      * @return la zona creada con su id asignado
      */
-    public Zona crear(String nombre, String descripcion) {
+    public Zona crear(String nombre, String descripcion, String ubicacion,
+                      com.tomasrojas.invernadero.model.TipoZona tipo,
+                      java.math.BigDecimal areaM2) {
         Zona zona = new Zona();
         zona.setNombre(nombre);
         zona.setDescripcion(descripcion);
+        zona.setUbicacion(ubicacion);
+        zona.setTipo(tipo);
+        zona.setAreaM2(areaM2);
         return zonaPort.guardar(zona);
     }
 

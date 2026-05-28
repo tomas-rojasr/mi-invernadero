@@ -7,25 +7,20 @@
  */
 package com.tomasrojas.invernadero.api.dto;
 
+import com.tomasrojas.invernadero.model.EstadoCultivo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-/**
- * Datos editables en el cuerpo de la petición {@code PUT /api/v1/zonas/{id}/cultivos/{cultivoId}}.
- *
- * @param nombre   nuevo nombre del cultivo (obligatorio)
- * @param variedad nueva variedad (opcional)
- * @param notas    nuevas notas de seguimiento (opcional)
- */
+import java.math.BigDecimal;
+import java.time.Instant;
+
 public record ActualizarCultivoRequest(
-
-        @NotBlank(message = "El nombre del cultivo es obligatorio")
-        @Size(max = 200)
-        String nombre,
-
-        @Size(max = 120)
-        String variedad,
-
-        @Size(max = 2000)
-        String notas
+        @NotBlank @Size(max = 200) String nombre,
+        @Size(max = 120) String variedad,
+        @Size(max = 2000) String notas,
+        Instant fechaCosechaEstimada,
+        BigDecimal areaM2,
+        Integer cantidadSembrada,
+        BigDecimal rendimientoEsperadoKg,
+        EstadoCultivo estado
 ) {}

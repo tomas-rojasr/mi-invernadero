@@ -19,12 +19,22 @@
     "nueva": "New zone",
     "nombre": "Name",
     "descripcion": "Description",
+    "ubicacion": "Location",
+    "tipo": "Type",
+    "tipo_placeholder": "Zone type (optional)",
+    "area_m2": "Area (m²)",
     "creada": "Created",
     "guardar": "Save",
     "cancelar": "Cancel",
     "eliminar": "Delete",
     "no_zonas": "No zones registered yet.",
     "confirmar_eliminar": "Delete this zone and all its data?"
+  },
+  "tipoZona": {
+    "INVERNADERO": "Greenhouse",
+    "CAMPO_ABIERTO": "Open field",
+    "HIDROPONICO": "Hydroponic",
+    "MACETAS": "Pots"
   },
   "lectura": {
     "title": "Environmental readings",
@@ -33,10 +43,17 @@
     "selecciona_zona": "Select a zone",
     "tipo": "Metric type",
     "valor": "Value",
+    "fuente": "Source",
+    "notas": "Notes (optional)",
     "registrada": "Recorded at",
     "no_lecturas": "No readings for this zone.",
     "guardar": "Record",
-    "eliminar": "Delete"
+    "eliminar": "Delete",
+    "error_campos": "Select a zone and enter a value"
+  },
+  "fuente": {
+    "MANUAL": "Manual",
+    "SENSOR_AUTOMATICO": "Automatic sensor"
   },
   "cultivo": {
     "title": "Crops",
@@ -44,14 +61,28 @@
     "zona": "Zone",
     "selecciona_zona": "Select a zone",
     "nombre": "Crop name",
-    "descripcion": "Description",
+    "variedad": "Variety (optional)",
+    "notas": "Notes (optional)",
     "plantado": "Planting date",
+    "fecha_cosecha": "Estimated harvest",
+    "area_m2": "Area (m²)",
+    "cantidad_sembrada": "Quantity planted",
+    "rendimiento_kg": "Expected yield (kg)",
+    "estado": "Status",
+    "estado_placeholder": "Status (optional)",
     "creado": "Registered",
     "no_cultivos": "No crops for this zone.",
     "guardar": "Save crop",
     "cancelar": "Cancel",
     "editar": "Edit",
-    "eliminar": "Delete"
+    "eliminar": "Delete",
+    "error_campos": "Select a zone and enter the name"
+  },
+  "estadoCultivo": {
+    "ACTIVO": "Active",
+    "EN_PREPARACION": "In preparation",
+    "COSECHADO": "Harvested",
+    "PERDIDO": "Lost"
   },
   "umbral": {
     "title": "Environmental thresholds",

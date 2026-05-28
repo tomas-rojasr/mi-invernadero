@@ -7,22 +7,16 @@
  */
 package com.tomasrojas.invernadero.api.dto;
 
+import com.tomasrojas.invernadero.model.FuenteLectura;
 import com.tomasrojas.invernadero.model.MetricaTipo;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-/**
- * Datos requeridos en el cuerpo de la petición {@code POST /api/v1/zonas/{id}/lecturas}.
- *
- * @param tipo  tipo de métrica ambiental (obligatorio)
- * @param valor valor de la medición (obligatorio)
- */
 public record RegistrarLecturaRequest(
-
-        @NotNull(message = "El tipo de métrica es obligatorio")
-        MetricaTipo tipo,
-
-        @NotNull(message = "El valor de la lectura es obligatorio")
-        BigDecimal valor
+        @NotNull MetricaTipo tipo,
+        @NotNull BigDecimal valor,
+        FuenteLectura fuente,
+        @Size(max = 500) String notas
 ) {}

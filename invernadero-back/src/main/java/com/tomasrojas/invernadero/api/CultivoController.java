@@ -70,8 +70,10 @@ public class CultivoController {
             @PathVariable UUID zonaId,
             @Valid @RequestBody CrearCultivoRequest request) {
         return mapper.toCultivoResponse(
-                service.crear(zonaId, request.nombre(), request.variedad(),
-                        request.notas(), request.plantadoEn())
+                service.crear(zonaId, request.nombre(), request.variedad(), request.notas(),
+                        request.plantadoEn(), request.fechaCosechaEstimada(),
+                        request.areaM2(), request.cantidadSembrada(),
+                        request.rendimientoEsperadoKg(), request.estado())
         );
     }
 
@@ -90,7 +92,9 @@ public class CultivoController {
             @PathVariable UUID cultivoId,
             @Valid @RequestBody ActualizarCultivoRequest request) {
         return mapper.toCultivoResponse(
-                service.actualizar(cultivoId, request.nombre(), request.variedad(), request.notas())
+                service.actualizar(cultivoId, request.nombre(), request.variedad(), request.notas(),
+                        request.fechaCosechaEstimada(), request.areaM2(),
+                        request.cantidadSembrada(), request.rendimientoEsperadoKg(), request.estado())
         );
     }
 

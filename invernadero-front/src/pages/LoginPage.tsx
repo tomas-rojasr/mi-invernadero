@@ -59,7 +59,6 @@ export default function LoginPage() {
           </button>
         )}
 
-        <p style={styles.footer}>Electiva 1 · Ingeniería de Software</p>
       </div>
     </div>
   );
@@ -119,10 +118,5 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: '1rem',
     cursor: 'pointer',
     textDecoration: 'none',
-  },
-  footer: {
-    marginTop: '1.8rem',
-    fontSize: '0.75rem',
-    color: '#aaa',
   },
 };

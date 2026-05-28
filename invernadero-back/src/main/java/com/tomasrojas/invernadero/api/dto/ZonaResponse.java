@@ -7,20 +7,18 @@
  */
 package com.tomasrojas.invernadero.api.dto;
 
+import com.tomasrojas.invernadero.model.TipoZona;
+
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * Representación de una zona devuelta por la API REST.
- *
- * @param id          identificador único de la zona
- * @param nombre      nombre de la zona
- * @param descripcion descripción de la zona
- * @param creadoEn    fecha y hora de creación en UTC (formato ISO-8601)
- */
 public record ZonaResponse(
         UUID id,
         String nombre,
         String descripcion,
+        String ubicacion,
+        TipoZona tipo,
+        BigDecimal areaM2,
         Instant creadoEn
 ) {}

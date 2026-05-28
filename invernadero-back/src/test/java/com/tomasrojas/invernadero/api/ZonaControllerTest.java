@@ -26,7 +26,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,7 +57,7 @@ class ZonaControllerTest {
     @Test
     @DisplayName("GET /api/v1/zonas debe retornar lista de zonas con HTTP 200")
     void listar_debeRetornarListaConStatus200() throws Exception {
-        Zona zona = new Zona(UUID.randomUUID(), "Zona Norte", "Descripción", Instant.now());
+        Zona zona = new Zona(UUID.randomUUID(), "Zona Norte", "Descripción", null, null, null, Instant.now());
         when(zonaService.listarTodas()).thenReturn(List.of(zona));
         when(webDtoMapper.toZonaResponse(zona)).thenCallRealMethod();
 
@@ -72,8 +72,8 @@ class ZonaControllerTest {
     @Test
     @DisplayName("POST /api/v1/zonas debe crear zona y retornar HTTP 201")
     void crear_debeRetornarZonaCreada() throws Exception {
-        Zona zona = new Zona(UUID.randomUUID(), "Zona Sur", "Nueva zona", Instant.now());
-        when(zonaService.crear(anyString(), anyString())).thenReturn(zona);
+        Zona zona = new Zona(UUID.randomUUID(), "Zona Sur", "Nueva zona", null, null, null, Instant.now());
+        when(zonaService.crear(anyString(), anyString(), any(), any(), any())).thenReturn(zona);
         when(webDtoMapper.toZonaResponse(zona)).thenCallRealMethod();
 
         String body = """
@@ -85,7 +85,7 @@ class ZonaControllerTest {
                         .content(body))
                 .andExpect(status().isCreated());
 
-        verify(zonaService, times(1)).crear("Zona Sur", "Nueva zona");
+        verify(zonaService, times(1)).crear(eq("Zona Sur"), eq("Nueva zona"), isNull(), isNull(), isNull());
     }
 
     @Test

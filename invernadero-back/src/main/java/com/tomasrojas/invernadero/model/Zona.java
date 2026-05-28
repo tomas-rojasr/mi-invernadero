@@ -9,6 +9,7 @@
  */
 package com.tomasrojas.invernadero.model;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -30,24 +31,29 @@ public class Zona {
     /** Descripción detallada del propósito o características de la zona. */
     private String descripcion;
 
+    /** Ubicación física dentro del invernadero. */
+    private String ubicacion;
+
+    /** Tipo de infraestructura de la zona. */
+    private TipoZona tipo;
+
+    /** Área en metros cuadrados. */
+    private BigDecimal areaM2;
+
     /** Marca de tiempo de creación en UTC. */
     private Instant creadoEn;
 
     /** Constructor vacío requerido para mapeos internos. */
     public Zona() {}
 
-    /**
-     * Crea una zona con todos sus atributos definidos.
-     *
-     * @param id          identificador único
-     * @param nombre      nombre de la zona
-     * @param descripcion descripción de la zona
-     * @param creadoEn    fecha y hora de creación en UTC
-     */
-    public Zona(UUID id, String nombre, String descripcion, Instant creadoEn) {
+    public Zona(UUID id, String nombre, String descripcion, String ubicacion,
+                TipoZona tipo, BigDecimal areaM2, Instant creadoEn) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.ubicacion = ubicacion;
+        this.tipo = tipo;
+        this.areaM2 = areaM2;
         this.creadoEn = creadoEn;
     }
 
@@ -65,15 +71,18 @@ public class Zona {
     /** @param nombre nombre de la zona */
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    /** @return la descripción de la zona */
     public String getDescripcion() { return descripcion; }
-
-    /** @param descripcion descripción de la zona */
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    /** @return la marca de tiempo de creación en UTC */
-    public Instant getCreadoEn() { return creadoEn; }
+    public String getUbicacion() { return ubicacion; }
+    public void setUbicacion(String ubicacion) { this.ubicacion = ubicacion; }
 
-    /** @param creadoEn marca de tiempo de creación en UTC */
+    public TipoZona getTipo() { return tipo; }
+    public void setTipo(TipoZona tipo) { this.tipo = tipo; }
+
+    public BigDecimal getAreaM2() { return areaM2; }
+    public void setAreaM2(BigDecimal areaM2) { this.areaM2 = areaM2; }
+
+    public Instant getCreadoEn() { return creadoEn; }
     public void setCreadoEn(Instant creadoEn) { this.creadoEn = creadoEn; }
 }
